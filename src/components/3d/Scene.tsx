@@ -19,7 +19,7 @@ const Scene: FC<SceneType> = (props: SceneType) => {
       <Light />
       <PostProcessing />
       {/* Three components */}
-      <ContactShadows position={[0, 0, 0]} opacity={1} scale={10} blur={0.25} far={10} resolution={1024} />
+      <ContactShadows position={[0, 0, 0]} opacity={1} scale={100} blur={0.25} far={100} resolution={1024} />
       <Sky distance={450000} sunPosition={[0, 90, 0]} inclination={0} azimuth={0.25} />
     </>
   );
