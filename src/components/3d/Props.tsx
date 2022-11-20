@@ -1,5 +1,5 @@
 // Packages
-import { FC, useEffect, useMemo } from 'react';
+import { FC, useEffect, useMemo, useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { Event, Object3D } from 'three';
 import { clone } from 'three/examples/jsm/utils/SkeletonUtils';
@@ -8,6 +8,7 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils';
 import PropsType from '../../types/props/3d/props';
 
 const Props: FC<PropsType> = (props: PropsType) => {
+  const ref = useRef();
   // Props
   const { title, position, rotation, scale } = props;
   
@@ -24,7 +25,7 @@ const Props: FC<PropsType> = (props: PropsType) => {
   }, [scene]);
  
   return (
-    <primitive position={position} rotation={rotation} scale={scale} object={scene} />
+    <primitive ref={ref} position={position} rotation={rotation} scale={scale} object={scene} />
   );
 };
 

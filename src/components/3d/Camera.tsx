@@ -13,10 +13,10 @@ const Camera: FC<CameraType> = (props: CameraType) => {
     <>
       <OrbitControls
         enablePan={false}
-        enableDamping={false}
+        enableDamping={true}
         enableRotate={true}
-        minDistance={5}
-        maxDistance={5}
+        minDistance={2.5}
+        maxDistance={10}
         maxPolarAngle={Math.PI * 0.5}
       />
       <PerspectiveCamera position={[0, -1, 0]}>
