@@ -2,7 +2,9 @@
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 
 // Types
+import AnimationType from '../../types/props/3d/animation';
 import PropsType from '../../types/props/3d/props';
+import Animation from '../3d/Animation';
 
 // Components
 import Environment from '../3d/Environment';
@@ -12,6 +14,7 @@ const DesertGenerator: FC = () => {
   // States
   const [cliffYRotation, setCliffYRotation]: [number | null, Dispatch<SetStateAction<number | null>>] = useState<number | null>(null);
   const [rocks, setRocks]: [PropsType[] | null, Dispatch<SetStateAction<PropsType[] | null>>] = useState<PropsType[] | null>(null);
+  const [cactus, setCactus]: [AnimationType[] | null, Dispatch<SetStateAction<AnimationType[] | null>>] = useState<AnimationType[] | null>(null);
 
   useEffect((): void => {
     // Sets cliff Y axis rotation randomly
@@ -51,12 +54,11 @@ const DesertGenerator: FC = () => {
     }
 
     setRocks(newRocks);
-
-    console.log(newRocks);
   }, [setCliffYRotation, setRocks]);
 
   return (
     <>
+      {/* Creates as many rocks there is in the "rocks" state */}
       {
         (rocks && rocks.length > 0
         ) ? (
@@ -69,6 +71,7 @@ const DesertGenerator: FC = () => {
           null
         )
       }
+      <Animation title={'Cactus'} position={[0, 0, 0]} rotation={[0, 0, 0]} scale={[1, 1, 1]} />
       <Props title={'Cliff'} position={[0, -10, 0]} rotation={[0, cliffYRotation as number, 0]} scale={[10, 10, 10]} />
       <Environment title={'Sand'} position={[0, -0.01, 0]} rotation={[0, 0, 0]} scale={[1, 1, 1]} />
     </>

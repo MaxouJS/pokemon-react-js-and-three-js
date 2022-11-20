@@ -4,9 +4,9 @@ import { useAnimations, useGLTF } from '@react-three/drei';
 import { clone } from 'three/examples/jsm/utils/SkeletonUtils';
 
 // Types
-import Animation from '../../types/props/3d/animation';
+import AnimationType from '../../types/props/3d/animation';
 
-const Animation: FC<Animation> = (props: Animation) => {
+const Animation: FC<AnimationType> = (props: AnimationType) => {
   // Props
   const { title, position, rotation, scale } = props;
   
