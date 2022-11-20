@@ -11,7 +11,7 @@ const Light: FC<LightType> = (props: LightType) => {
   return (
     <>
       <ambientLight intensity={0.25} />
-      <pointLight position={[50, 50, 50]} intensity={0.5} />
+      <pointLight position={[20, 100, 20]} intensity={0.75} />
     </>
   );
 };

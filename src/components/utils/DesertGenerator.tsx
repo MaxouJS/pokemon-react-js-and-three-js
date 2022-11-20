@@ -64,8 +64,7 @@ const DesertGenerator: FC = () => {
         });
       };
     };
-    
-    // Generating all the elements
+        
     // Generates rocks and cactus
     creatingElements(
       // Elements

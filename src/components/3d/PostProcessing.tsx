@@ -14,7 +14,8 @@ const PostProcessing: FC<PostProcessingType> = (props: PostProcessingType) => {
       <DepthOfField focusDistance={0} focalLength={0.1} bokehScale={20} height={1024} />
       <Bloom luminanceThreshold={1} luminanceSmoothing={1} height={1024} />
       <Noise opacity={0.05} />
-      <HueSaturation saturation={0.125} />
+      <HueSaturation saturation={0.25} />
+      <Vignette eskil={true} offset={0} darkness={1} />
     </EffectComposer>
   );
 };
