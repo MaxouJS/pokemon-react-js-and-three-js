@@ -1,6 +1,6 @@
 // Packages
 import { FC } from 'react';
-import { ContactShadows, Sky } from '@react-three/drei';
+import { ContactShadows } from '@react-three/drei';
 
 // Types
 import SceneType from '../../types/props/3d/scene';
@@ -19,8 +19,8 @@ const Scene: FC<SceneType> = (props: SceneType) => {
       <Light />
       <PostProcessing />
       {/* Three components */}
-      <ContactShadows position={[0, 0, 0]} opacity={1} scale={100} blur={0.25} far={100} resolution={1024} />
-      <Sky distance={450000} sunPosition={[0, 90, 0]} inclination={0} azimuth={0.25} />
+      {/* Shadows are not casted over 50 meters for increasing the framerate */}
+      <ContactShadows position={[0, 0, 0]} opacity={0.75} scale={100} blur={0.1} far={100} resolution={1024} />
     </>
   );
 };

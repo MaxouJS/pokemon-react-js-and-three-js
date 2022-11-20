@@ -13,48 +13,47 @@ import Props from '../3d/Props';
 const DesertGenerator: FC = () => {
   // States
   const [cliffYRotation, setCliffYRotation]: [number | null, Dispatch<SetStateAction<number | null>>] = useState<number | null>(null);
-  const [elements, setElements]: [AnimationType[] | PropsType[] | null, Dispatch<SetStateAction<AnimationType[] | PropsType[] | null>>] = useState<AnimationType[] | PropsType[] | null>(null);
-  const [cactus, setCactus]: [AnimationType[] | null, Dispatch<SetStateAction<AnimationType[] | null>>] = useState<AnimationType[] | null>(null);
-  const [dunes, setDunes]: [PropsType[] | null, Dispatch<SetStateAction<PropsType[] | null>>] = useState<PropsType[] | null>(null);
-  const [rocks, setRocks]: [PropsType[] | null, Dispatch<SetStateAction<PropsType[] | null>>] = useState<PropsType[] | null>(null);
+  const [desertProps, setDesertProps]: [PropsType[] | null, Dispatch<SetStateAction<PropsType[] | null>>] = useState<PropsType[] | null>(null);
+  const [desertAnimatedProps, setDesertAnimatedProps]: [AnimationType[] | null, Dispatch<SetStateAction<AnimationType[] | null>>] = useState<AnimationType[] | null>(null);
 
   useEffect((): void => {
     // Sets cliff Y axis rotation randomly
     setCliffYRotation((Math.PI * Math.random() * 2));
 
     // Initializes empty array of 3D props
-    const newCactus: AnimationType[] = [];
-    const newDunes: PropsType[] = [];
-    const newRocks: PropsType[] = [];
+    const newDesertProps: PropsType[] = [];
+    const newDesertAnimatedProps: AnimationType[] = [];
 
     const creatingElements = (
       elements: number,
       elementName: string,
-      yRotation: number,
-      distance: number,
+      yPosition: number,
+      isYRotationRandom: boolean,
+      minDistance: number,
+      maxDistance: number,
       minScale: number,
       maxScale: number,
       array: AnimationType[] | PropsType[],
     ): void => {
       // Creates N elements with random position, rotation and scale
       for (let index = 0; index < elements; index++) {
-        let randomXPosition = Math.random() * distance - (distance / 2);
+        let randomXPosition = Math.random() * maxDistance - (maxDistance / 2);
 
         // Checks if a element can be in the X axis position of a Pokémon, then reassigns the X axis of the element if it's the case
-        while (randomXPosition >= -10 && randomXPosition <= 10) {
-          randomXPosition = Math.random() * distance - (distance / 2);
+        while (randomXPosition >= -minDistance && randomXPosition <= minDistance) {
+          randomXPosition = Math.random() * maxDistance - (maxDistance / 2);
         }
 
-        let randomZPosition = Math.random() * distance - (distance / 2);
+        let randomZPosition = Math.random() * maxDistance - (maxDistance / 2);
 
         // Checks if a element can be in the Z axis position of a Pokémon, then reassigns the Z axis of the element if it's the case
-        while (randomZPosition >= -10 && randomZPosition <= 10) {
-          randomZPosition = Math.random() * distance - (distance / 2);
+        while (randomZPosition >= -minDistance && randomZPosition <= minDistance) {
+          randomZPosition = Math.random() * maxDistance - (maxDistance / 2);
         }
 
         // Creates a random position, rotation and scale
-        const randomPosition: number[] = [randomXPosition, 0, randomZPosition];
-        const randomRotation: number[] = [0, yRotation, 0];
+        const randomPosition: number[] = [randomXPosition, yPosition, randomZPosition];
+        const randomRotation: number[] = [0, isYRotationRandom ? (Math.PI * Math.random() * 2) : 0, 0];
         const randomScale: number = Math.random() * maxScale + minScale;
 
         array.push({
@@ -65,81 +64,155 @@ const DesertGenerator: FC = () => {
         });
       };
     };
+    
+    // Generating all the elements
+    // Generates rocks and cactus
+    creatingElements(
+      // Elements
+      10,
+      // Element name
+      'DesertProps1',
+      // Y axis position
+      0.25,
+      // Y axis rotation
+      true,
+      // Minimum distance
+      5,
+      // Maximum distance
+      50,
+      // Minimum scale
+      10,
+      // Maximum scale
+      20,
+      // Targeted array
+      newDesertProps,
+    );
 
-    // Generating all the cactus
+    // Generates small cactus
+    creatingElements(
+      // Elements
+      50,
+      // Element name
+      'DesertProps2',
+      // Y axis position
+      0,
+      // Y axis rotation
+      true,
+      // Minimum distance
+      5,
+      // Maximum distance
+      100,
+      // Minimum scale
+      10,
+      // Maximum scale
+      20,
+      // Targeted array
+      newDesertProps,
+    );
+
+    // Generates huge dunes
+    creatingElements(
+      // Elements
+      50,
+      // Element name
+      'DesertProps3',
+      // Y axis position
+      0,
+      // Y axis rotation
+      true,
+      // Minimum distance
+      50,
+      // Maximum distance
+      500,
+      // Minimum scale
+      10,
+      // Maximum scale
+      100,
+      // Targeted array
+      newDesertProps,
+    );
+
+    // Generates small dunes
+    creatingElements(
+      // Elements
+      25,
+      // Element name
+      'DesertProps3',
+      // Y axis position
+      0,
+      // Y axis rotation
+      true,
+      // Minimum distance
+      5,
+      // Maximum distance
+      100,
+      // Minimum scale
+      1,
+      // Maximum scale
+      10,
+      // Targeted array
+      newDesertProps,
+    );
+
+    // Generates animated cactus
     creatingElements(
       // Elements
       20,
       // Element name
       'Cactus',
+      // Y axis position
+      -0.25,
       // Y axis rotation
-      0,
-      // Distance
-      50,
+      false,
+      // Minimum distance
+      5,
+      // Maximum distance
+      100,
       // Minimum scale
       0.5,
       // Maximum scale
       2,
       // Targeted array
-      newCactus,
-    );
-    
-    // Generating all the dunes
-    creatingElements(
-      // Elements
-      100,
-      // Element name
-      'Dune',
-      // Y axis rotation
-      (Math.PI * Math.random() * 2),
-      // Distance
-      100,
-      // Minimum scale
-      0.25,
-      // Maximum scale
-      2,
-      // Targeted array
-      newRocks,
-    );
-    
-
-    // Generating all the rocks
-    creatingElements(
-      // Elements
-      100,
-      // Element name
-      'Rock',
-      // Y axis rotation
-      (Math.PI * Math.random() * 2),
-      // Distance
-      200,
-      // Minimum scale
-      0.25,
-      // Maximum scale
-      2,
-      // Targeted array
-      newRocks,
+      newDesertAnimatedProps,
     );
 
-    setCactus(newCactus);
-    setDunes(newDunes);
-    setRocks(newRocks);
-  }, [setCactus, setDunes, setCliffYRotation, setRocks]);
+    setDesertProps(newDesertProps);
+    setDesertAnimatedProps(newDesertAnimatedProps);
+  }, [setCliffYRotation, setDesertAnimatedProps, setDesertProps]);
 
   return (
     <>
-      {/* Creates as many rocks there is in the "rocks" state */}
+      {/* Creates as many desert props there is in the "desertProps" state */}
       {
-        (cactus && cactus.length > 0
+        (desertProps && desertProps.length > 0
         ) ? (
-          cactus.map((c: PropsType, index: number) => {
+          desertProps.map((d: PropsType, index: number) => {
+            return (
+              <Props
+                key={index}
+                title={d.title}
+                position={d.position}
+                rotation={d.rotation}
+                scale={d.scale}
+              />
+            );
+          })
+        ) : (
+          null
+        )
+      }
+      {/* Creates as many desert animated props there is in the "desertAnimatedProps" state */}
+      {
+        (desertAnimatedProps && desertAnimatedProps.length > 0
+        ) ? (
+          desertAnimatedProps.map((d: AnimationType, index: number) => {
             return (
               <Animation
                 key={index}
-                title={c.title}
-                position={c.position}
-                rotation={c.rotation}
-                scale={c.scale}
+                title={d.title}
+                position={d.position}
+                rotation={d.rotation}
+                scale={d.scale}
               />
             );
           })
@@ -147,46 +220,9 @@ const DesertGenerator: FC = () => {
           null
         )
       }
-      {/* Creates as many dunes there is in the "dunes" state */}
-      {
-        (dunes && dunes.length > 0
-        ) ? (
-          dunes.map((r: PropsType, index: number) => {
-            return (
-              <Props
-                key={index}
-                title={r.title}
-                position={r.position}
-                rotation={r.rotation}
-                scale={r.scale}
-              />
-            );
-          })
-        ) : (
-          null
-        )
-      }
-      {/* Creates as many rocks there is in the "rocks" state */}
-      {
-        (rocks && rocks.length > 0
-        ) ? (
-          rocks.map((r: PropsType, index: number) => {
-            return (
-              <Props
-                key={index}
-                title={r.title}
-                position={r.position}
-                rotation={r.rotation}
-                scale={r.scale}
-              />
-            );
-          })
-        ) : (
-          null
-        )
-      }
-      <Props title={'Cliff'} position={[0, -10, 0]} rotation={[0, cliffYRotation as number, 0]} scale={[10, 10, 10]} />
+      <Props title={'Cliff'} position={[0, -100, 0]} rotation={[0, cliffYRotation as number, 0]} scale={[10, 10, 10]} />
       <Environment title={'Sand'} position={[0, -0.01, 0]} rotation={[0, 0, 0]} scale={[1, 1, 1]} />
+      <Environment title={'Sky'} position={[0, 0, 0]} rotation={[0, Math.PI * 1.75, 0]} scale={[10, 10, 10]} />
     </>
   );
 };
