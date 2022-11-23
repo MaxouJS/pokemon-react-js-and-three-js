@@ -83,10 +83,19 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
           />
         </Html>
         {/* Initializes 3d scene */}
-        <Camera>
+        <Camera
+          position={[0, -1.25, 0]}
+          rotation={[0, Math.PI * 1.5, 0]}
+          enableRotate={true}
+          minimumDistance={10}
+          maximumDistance={10}
+          maximumPolarAngle={Math.PI * 0.5}
+        >
           <Scene
-            enablePostProcessing={false}
-            enableShadows={false}
+            enablePostProcessing={true}
+            enableShadows={true}
+            blurMinimumDistance={0.1}
+            blurMaximumDistance={50}
           />
           <MapGenerator />
           <Animation

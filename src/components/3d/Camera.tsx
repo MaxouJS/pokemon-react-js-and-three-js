@@ -7,19 +7,20 @@ import CameraType from '../../types/props/3d/camera';
 
 const Camera: FC<CameraType> = (props: CameraType) => {
   // Props
-  const {children} = props;
+  const {children, position, rotation, enableRotate, minimumDistance, maximumDistance, maximumPolarAngle} = props;
   
   return (
     <>
       <OrbitControls
         enablePan={false}
         enableDamping={true}
-        enableRotate={true}
-        minDistance={10}
-        maxDistance={10}
-        maxPolarAngle={Math.PI * 0.5}
+        enableRotate={enableRotate}
+        minDistance={minimumDistance}
+        maxDistance={maximumDistance}
+        maxPolarAngle={maximumPolarAngle}
       />
-      <PerspectiveCamera position={[0, -1.25, 0]} rotation={[0, Math.PI * 1.5, 0]} >
+      {/* @ts-ignore */}
+      <PerspectiveCamera position={position} rotation={rotation} >
         {children}
       </PerspectiveCamera>
     </>

@@ -11,16 +11,20 @@ import PostProcessing from './PostProcessing';
 
 const Scene: FC<SceneType> = (props: SceneType) => {
   // Props
-  const { enablePostProcessing, enableShadows } = props;
+  const { enablePostProcessing, enableShadows, blurMinimumDistance, blurMaximumDistance } = props;
   
   return (
     <>
       {/* Custom components */}
       <Light />
       {
-        (enablePostProcessing
+        (
+          enablePostProcessing
         ) ? (
-          <PostProcessing />
+          <PostProcessing
+            blurMinimumDistance={blurMinimumDistance}
+            blurMaximumDistance={blurMaximumDistance}
+          />
         ) : (
           null
         )
@@ -30,7 +34,14 @@ const Scene: FC<SceneType> = (props: SceneType) => {
       {
         (enableShadows
         ) ? (
-          <ContactShadows position={[0, 0, 0]} opacity={0.75} scale={50} blur={0.1} far={100} resolution={2048} />
+          <ContactShadows
+            position={[0, 0, 0]}
+            opacity={0.75}
+            scale={50}
+            blur={0.1}
+            far={100}
+            resolution={2048}
+          />
         ) : (
           null
         )

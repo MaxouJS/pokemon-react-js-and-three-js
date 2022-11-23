@@ -7,12 +7,12 @@ import PostProcessingType from '../../types/props/3d/postProcessing';
 
 const PostProcessing: FC<PostProcessingType> = (props: PostProcessingType) => {
   // Props
-  const {} = props;
+  const { blurMinimumDistance, blurMaximumDistance } = props;
   
   return (
     <EffectComposer>
       {/* Adds simple visual effects to improving render's quality */}
-      <DepthOfField focusDistance={0} focalLength={0.1} bokehScale={50} height={1024} />
+      <DepthOfField focusDistance={0} focalLength={blurMinimumDistance} bokehScale={blurMaximumDistance} height={1024} />
       <Bloom luminanceThreshold={1} luminanceSmoothing={1} height={1024} />
       <Noise opacity={0.05} />
       <HueSaturation saturation={0.125} />
