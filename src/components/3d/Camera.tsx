@@ -15,11 +15,11 @@ const Camera: FC<CameraType> = (props: CameraType) => {
         enablePan={false}
         enableDamping={true}
         enableRotate={true}
-        minDistance={2.5}
+        minDistance={10}
         maxDistance={10}
         maxPolarAngle={Math.PI * 0.5}
       />
-      <PerspectiveCamera position={[0, -1, 0]}>
+      <PerspectiveCamera position={[0, -1.25, 0]} rotation={[0, Math.PI * 1.5, 0]} >
         {children}
       </PerspectiveCamera>
     </>

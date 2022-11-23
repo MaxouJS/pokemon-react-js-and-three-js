@@ -1,6 +1,7 @@
 // Packages
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
+import { Html } from '@react-three/drei';
 
 // Components
 // 2d
@@ -14,9 +15,12 @@ import Animation from '../components/3d/Animation';
 // Types
 import BattleType from '../types/battle';
 import PokemonType from '../types/pokemon';
-import { Html } from '@react-three/drei';
+import ScreenType from '../types/props/screens/screen';
 
-const Battle: FC = () => {
+const Battle: FC<ScreenType> = (props: ScreenType) => {
+  // props
+  const { changeBGM, changeScreen }: ScreenType = props;
+
   // States
   const [battle, setBattle]: [BattleType | null, Dispatch<SetStateAction<BattleType | null>>] = useState<BattleType | null>(null);
 
@@ -25,9 +29,12 @@ const Battle: FC = () => {
     const newTeam1: PokemonType[] = [
       {
         pokemonName: 'Squirtle',
-        currentLV: 1,
-        currentHP: 1,
-        maximumHP: 1,
+        currentLV: 7,
+        currentHP: 10,
+        maximumHP: 10,
+        attack: 1,
+        defense: 1,
+        speed: 1,
         position: [0, 0, 7.5],
         rotation: [0, Math.PI * 1, 0],
         scale: [0.75, 0.75, 0.75],
@@ -39,9 +46,12 @@ const Battle: FC = () => {
     const newTeam2: PokemonType[] = [
       {
         pokemonName: 'Onix',
-        currentLV: 1,
-        currentHP: 1,
-        maximumHP: 1,
+        currentLV: 14,
+        currentHP: 10,
+        maximumHP: 10,
+        attack: 1,
+        defense: 1,
+        speed: 1,
         position: [0, 0, -7.5],
         rotation: [0, Math.PI * 2, 0],
         scale: [1.5, 1.5, 1.5],

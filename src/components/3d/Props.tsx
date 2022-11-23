@@ -28,7 +28,7 @@ const Props: FC<PropsType> = (props: PropsType) => {
   );
 };
 
-// Preloads models at the 3d canvas initializion
+// Preloads 3d models at the 3d canvas initializion
 useGLTF.preload('./src/assets/props/Rock1.glb');
 useGLTF.preload('./src/assets/props/Rock2.glb');
 

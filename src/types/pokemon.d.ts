@@ -3,6 +3,9 @@ interface Pokemon {
   currentLV: number;
   currentHP: number;
   maximumHP: number;
+  attack: number;
+  defense: number;
+  speed: number;
   position: number[];
   rotation: number[];
   scale: number[];

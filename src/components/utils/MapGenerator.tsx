@@ -114,7 +114,8 @@ const MapGenerator: FC = () => {
     <>
       {/* Creates as many map props there is in the "mapProps" state */}
       {
-        (mapProps && mapProps.length > 0
+        (
+          mapProps && mapProps.length > 0
         ) ? (
           mapProps.map((d: PropsType, index: number) => {
             return (
@@ -133,7 +134,8 @@ const MapGenerator: FC = () => {
       }
       {/* Creates as many map animated props there is in the "mapAnimatedProps" state */}
       {
-        (mapAnimatedProps && mapAnimatedProps.length > 0
+        (
+          mapAnimatedProps && mapAnimatedProps.length > 0
         ) ? (
           mapAnimatedProps.map((d: AnimationType, index: number) => {
             return (
@@ -150,7 +152,7 @@ const MapGenerator: FC = () => {
           null
         )
       }
-      <Environment title={'Stadium'} position={[0, -0.05, 0]} rotation={[0, 0, 0]} scale={[2, 2, 2]} />
+      <Environment title={'Stadium'} position={[0, -0.05, 0]} rotation={[0, Math.PI / 1, 0]} scale={[2, 2, 2]} />
     </>
   );
 };
