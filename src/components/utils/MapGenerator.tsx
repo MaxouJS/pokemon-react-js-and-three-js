@@ -10,16 +10,13 @@ import Animation from '../3d/Animation';
 import Environment from '../3d/Environment';
 import Props from '../3d/Props';
 
+// In this project, the map generator is only used for generating random rocks, but you can use it to generates as many random elements you need for your scene
 const MapGenerator: FC = () => {
   // States
-  const [cliffYRotation, setCliffYRotation]: [number | null, Dispatch<SetStateAction<number | null>>] = useState<number | null>(null);
   const [mapProps, setMapProps]: [PropsType[] | null, Dispatch<SetStateAction<PropsType[] | null>>] = useState<PropsType[] | null>(null);
   const [mapAnimatedProps, setMapAnimatedProps]: [AnimationType[] | null, Dispatch<SetStateAction<AnimationType[] | null>>] = useState<AnimationType[] | null>(null);
 
   useEffect((): void => {
-    // Sets cliff Y axis rotation randomly
-    setCliffYRotation((Math.PI * Math.random() * 2));
-
     // Initializes empty array of 3D props
     const newMapProps: PropsType[] = [];
     const newMapAnimatedProps: AnimationType[] = [];
@@ -65,10 +62,32 @@ const MapGenerator: FC = () => {
       };
     };
 
-    // Generates animated cactus
+    // Generates small rocks
     creatingElements(
       // Elements
-      25,
+      20,
+      // Element name
+      'Rock',
+      // Y axis position
+      0,
+      // Y axis rotation
+      true,
+      // Minimum distance
+      5,
+      // Maximum distance
+      40,
+      // Minimum scale
+      0.125,
+      // Maximum scale
+      0.25,
+      // Targeted array
+      newMapProps,
+    );
+
+    // Generates big rocks
+    creatingElements(
+      // Elements
+      5,
       // Element name
       'Rock',
       // Y axis position
@@ -76,20 +95,20 @@ const MapGenerator: FC = () => {
       // Y axis rotation
       true,
       // Minimum distance
-      5,
+      7.5,
       // Maximum distance
-      50,
+      40,
       // Minimum scale
-      0.25,
+      1,
       // Maximum scale
-      2,
+      1.5,
       // Targeted array
       newMapProps,
     );
 
     setMapProps(newMapProps);
     setMapAnimatedProps(newMapAnimatedProps);
-  }, [setCliffYRotation, setMapAnimatedProps, setMapProps]);
+  }, [setMapAnimatedProps, setMapProps]);
 
   return (
     <>
@@ -131,7 +150,7 @@ const MapGenerator: FC = () => {
           null
         )
       }
-      <Environment title={'Stadium'} position={[0, -0.01, 0]} rotation={[0, 0, 0]} scale={[2, 2, 2]} />
+      <Environment title={'Stadium'} position={[0, -0.05, 0]} rotation={[0, 0, 0]} scale={[2, 2, 2]} />
     </>
   );
 };
