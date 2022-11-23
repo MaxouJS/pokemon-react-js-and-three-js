@@ -22,12 +22,9 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
     <div className='absolute h-full w-full'>
       <Canvas>
         {/* Initializes UI */}
-        <Html as='div' fullscreen className='flex justify-center select-none p-8'>
-          <Settings
-            game={game}
-          />
-          <div className='flex flex-col space-y-6'>
-            <button onClick={(): void => {changeScreen('Battle')}} className='flex mt-auto text-6xl uppercase text-white font-bowlby-one animate-pulse'>Click or tap to play</button>
+        <Html as='div' fullscreen className='flex select-none'>
+          <div className='flex flex-col justify-center mt-auto w-full space-y-8 p-8'>
+            <button onClick={(): void => {changeScreen('Battle')}} className='text-2xl uppercase text-white font-bowlby-one animate-pulse lg:text-6xl md:text-4xl'>Click or tap to play</button>
             <div className='flex justify-center space-x-4'>
               <a href='https://www.linkedin.com/in/maxence-gumiero-47a048181/' target='_blank'>
                 <img src='./src/assets/icons/Linkedin.png' className='h-12 drop-shadow hover:scale-110 duration-100' />
@@ -44,8 +41,8 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
           position={[0, -1.25, 2.5]}
           rotation={[0, Math.PI * 1.5, 0]}
           enableRotate={false}
-          minimumDistance={0}
-          maximumDistance={0}
+          minimumDistance={1}
+          maximumDistance={1}
           maximumPolarAngle={Math.PI * 0.5}
         >
           {/* Initializes scene props */}

@@ -9,8 +9,12 @@ const Settings: FC<SettingsType> = (props: SettingsType) => {
   const { game }: SettingsType = props;
   
   return (
-    <div className='absolute'>
-      <input />
+    <div className='absolute h-full w-full'>
+      <div className='flex w-full h-full p-12'>
+        <div className='mt-auto'>
+          <input type='checkbox' />
+        </div>
+      </div>
     </div>
   );
 };
