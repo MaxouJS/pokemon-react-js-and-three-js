@@ -20,7 +20,7 @@ const Scene: FC<SceneType> = (props: SceneType) => {
       <PostProcessing />
       {/* Three components */}
       {/* Shadows are not casted over 50 meters for increasing the framerate */}
-      <ContactShadows position={[0, 0, 0]} opacity={0.75} scale={100} blur={0.1} far={100} resolution={1024} />
+      <ContactShadows position={[0, 0, 0]} opacity={0.75} scale={50} blur={0.1} far={100} resolution={2048} />
     </>
   );
 };

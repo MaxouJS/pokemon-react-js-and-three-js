@@ -3,11 +3,10 @@ import { FC } from 'react';
 import { Canvas } from '@react-three/fiber';
 
 // Components
-import Environment from '../components/3d/Environment';
-import Props from '../components/3d/Props';
 import Camera from '../components/3d/Camera';
 import Scene from '../components/3d/Scene';
-import DesertGenerator from '../components/utils/DesertGenerator';
+import MapGenerator from '../components/utils/MapGenerator';
+import Animation from '../components/3d/Animation';
 
 const Battle: FC = () => {
   return (
@@ -15,7 +14,19 @@ const Battle: FC = () => {
       <Canvas>
         <Camera>
           <Scene />
-          <DesertGenerator />
+          <MapGenerator />
+          <Animation
+            title={'SquirtleStance'}
+            position={[0, 0, 6.66]}
+            rotation={[0, 0, 0]}
+            scale={[1, 1, 1]}
+          />
+          <Animation
+            title={'OnixStance'}
+            position={[0, 0, -6.66]}
+            rotation={[0, 0, 0]}
+            scale={[1, 1, 1]}
+          />
         </Camera>
       </Canvas>
     </div>
