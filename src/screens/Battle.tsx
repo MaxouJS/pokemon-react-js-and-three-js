@@ -15,11 +15,12 @@ import Animation from '../components/3d/Animation';
 // Types
 import BattleType from '../types/battle';
 import PokemonType from '../types/pokemon';
-import ScreenType from '../types/props/screens/screen';
+import ScreenType from '../types/props/screen';
+import Settings from '../components/2d/Settings';
 
 const Battle: FC<ScreenType> = (props: ScreenType) => {
   // props
-  const { changeBGM, changeScreen }: ScreenType = props;
+  const { changeBGM, changeScreen, game }: ScreenType = props;
 
   // States
   const [battle, setBattle]: [BattleType | null, Dispatch<SetStateAction<BattleType | null>>] = useState<BattleType | null>(null);
@@ -82,7 +83,8 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
             team={2}
           />
         </Html>
-        {/* Initializes 3d scene */}
+        {/* Initializes 3d elements */}
+        {/* Initializes camera props */}
         <Camera
           position={[0, -1.25, 0]}
           rotation={[0, Math.PI * 1.5, 0]}
@@ -91,9 +93,10 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
           maximumDistance={10}
           maximumPolarAngle={Math.PI * 0.5}
         >
+          {/* Initializes scene props */}
           <Scene
-            enablePostProcessing={true}
-            enableShadows={true}
+            enablePostProcessing={game.enablePostProcessing}
+            enableShadows={game.enableShadows}
             blurMinimumDistance={0.1}
             blurMaximumDistance={50}
           />
