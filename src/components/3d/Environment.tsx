@@ -28,4 +28,7 @@ const Environment: FC<EnvironmentType> = (props: EnvironmentType) => {
   );
 };
 
+// Preloads 3d models at the 3d canvas initializion
+useGLTF.preload('./src/assets/environments/Stadium.glb');
+
 export default Environment;

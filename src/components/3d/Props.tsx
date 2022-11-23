@@ -8,7 +8,6 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils';
 import PropsType from '../../types/props/3d/props';
 
 const Props: FC<PropsType> = (props: PropsType) => {
-  const ref = useRef();
   // Props
   const { title, position, rotation, scale } = props;
   
@@ -25,8 +24,12 @@ const Props: FC<PropsType> = (props: PropsType) => {
   }, [scene]);
  
   return (
-    <primitive ref={ref} position={position} rotation={rotation} scale={scale} object={scene} />
+    <primitive position={position} rotation={rotation} scale={scale} object={scene} />
   );
 };
+
+// Preloads models at the 3d canvas initializion
+useGLTF.preload('./src/assets/props/Rock1.glb');
+useGLTF.preload('./src/assets/props/Rock2.glb');
 
 export default Props;

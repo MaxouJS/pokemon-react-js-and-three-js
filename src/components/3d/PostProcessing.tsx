@@ -11,6 +11,7 @@ const PostProcessing: FC<PostProcessingType> = (props: PostProcessingType) => {
   
   return (
     <EffectComposer>
+      {/* Adds simple visual effects to improving render's quality */}
       <DepthOfField focusDistance={0} focalLength={0.1} bokehScale={50} height={1024} />
       <Bloom luminanceThreshold={1} luminanceSmoothing={1} height={1024} />
       <Noise opacity={0.05} />

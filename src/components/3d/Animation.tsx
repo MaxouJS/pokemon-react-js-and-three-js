@@ -34,4 +34,8 @@ const Animation: FC<AnimationType> = (props: AnimationType) => {
   );
 };
 
+// Preloads 3d models at the 3d canvas initializion
+useGLTF.preload('./src/assets/animations/OnixStance.glb');
+useGLTF.preload('./src/assets/animations/SquirtleStance.glb');
+
 export default Animation;

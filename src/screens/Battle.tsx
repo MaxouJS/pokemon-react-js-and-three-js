@@ -14,6 +14,7 @@ import Animation from '../components/3d/Animation';
 // Types
 import BattleType from '../types/battle';
 import PokemonType from '../types/pokemon';
+import { Html } from '@react-three/drei';
 
 const Battle: FC = () => {
   // States
@@ -60,16 +61,23 @@ const Battle: FC = () => {
   return (
     <div className='absolute h-full w-full'>
       <Canvas>
-        <Card
-          pokemon={battle?.team1[0] as PokemonType}
-          position={battle?.team1[0].position as number[]}
-        />
-        <Card
-          pokemon={battle?.team2[0] as PokemonType}
-          position={battle?.team2[0].position as number[]}
-        />
+        {/* Initializes UI */}
+        <Html as='div' fullscreen className='flex select-none p-4'>
+          <Card
+            pokemon={battle?.team1[0] as PokemonType}
+            team={1}
+          />
+          <Card
+            pokemon={battle?.team2[0] as PokemonType}
+            team={2}
+          />
+        </Html>
+        {/* Initializes 3d scene */}
         <Camera>
-          <Scene />
+          <Scene
+            enablePostProcessing={false}
+            enableShadows={false}
+          />
           <MapGenerator />
           <Animation
             title={battle?.team1[0].currentAnimation as string}

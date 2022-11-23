@@ -4,7 +4,7 @@ import Pokemon from '../../pokemon';
 
 interface Card {
   pokemon: Pokemon;
-  position: number[];
+  team: number;
 };
 
 export default Card;

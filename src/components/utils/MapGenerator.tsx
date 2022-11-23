@@ -65,9 +65,9 @@ const MapGenerator: FC = () => {
     // Generates small rocks
     creatingElements(
       // Elements
-      20,
+      50,
       // Element name
-      'Rock',
+      'Rock2',
       // Y axis position
       0,
       // Y axis rotation
@@ -87,9 +87,9 @@ const MapGenerator: FC = () => {
     // Generates big rocks
     creatingElements(
       // Elements
-      5,
+      10,
       // Element name
-      'Rock',
+      'Rock1',
       // Y axis position
       -0.05,
       // Y axis rotation
@@ -97,7 +97,7 @@ const MapGenerator: FC = () => {
       // Minimum distance
       7.5,
       // Maximum distance
-      40,
+      50,
       // Minimum scale
       1,
       // Maximum scale
