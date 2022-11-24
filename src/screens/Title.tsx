@@ -35,17 +35,23 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
   const setGame: SetterOrUpdater<GameType> = useSetRecoilState<GameType>(gameState);
 
   // Functions
-  const changeScreen = (): void => {
+  const changeScreen = (): void => {  
+    // Initializes a new SFX sound  
+    const audio: HTMLAudioElement  = new Audio('./src/assets/sfx/Ok.wav');
+
+    // Checks if the SFX are enabled in the game global state
+    if (game.enableSFX) {
+      audio.play();
+    }
+    
     const newGame: GameType = {...game, currentScreen: 'Battle'};
 
     // Changes the current screen of the game global state
     setGame(newGame);
   };
 
-  // Sets the current BGM sound to 'Title' in the global state
-  const bgm = (): GameType => useSetBGM('Title');
-
-  bgm();
+  // Sets the current BGM sound played to 'Title' to the global game state
+  useSetBGM('Title');
 
   return (
     <div className='absolute h-full w-full bg-black'>

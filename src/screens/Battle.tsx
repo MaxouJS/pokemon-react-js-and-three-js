@@ -37,10 +37,8 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
   const setGame: SetterOrUpdater<GameType> = useSetRecoilState<GameType>(gameState);
   const [battle, setBattle]: [BattleType | null, Dispatch<SetStateAction<BattleType | null>>] = useState<BattleType | null>(null);
 
-  // Sets the current BGM sound to 'Title' in the global state
-  const bgm = (): GameType => useSetBGM('Battle');
-
-  bgm();
+  // Sets the current BGM sound played to 'Battle' to the global game state
+  useSetBGM('Battle');
 
   useEffect((): void => {
     // Initializes a new team for the player

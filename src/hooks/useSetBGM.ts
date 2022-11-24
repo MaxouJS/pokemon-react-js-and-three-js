@@ -15,7 +15,7 @@ const useSetBGM = (bgmName: string) => {
 
   useEffect((): void => {
     // Initializes BGM sounds
-    const newBgm: BGMType[] = [
+    const newBGM: BGMType[] = [
       {
         bgmName: 'Title',
         isPlayed: false
@@ -23,19 +23,19 @@ const useSetBGM = (bgmName: string) => {
       {
         bgmName: 'Battle',
         isPlayed: false
-      }
+      },
     ];
 
     // Stops all BGM sounds then plays the one passed as props
-    newBgm.forEach((n: BGMType) => {
+    newBGM.forEach((n: BGMType) => {
       if (n.bgmName === bgmName) {
         n.isPlayed = true;
       } else {
         n.isPlayed = false;
-      }
+      };
     });
 
-    setGame({...game, bgm: newBgm});
+    setGame({...game, bgm: newBGM});
     
   }, [setGame]);
 

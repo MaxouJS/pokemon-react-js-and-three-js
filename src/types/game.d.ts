@@ -9,7 +9,6 @@ interface Game {
   enablePostProcessing: boolean;
   enableShadows: boolean;
   bgm: BGM[];
-  sfx: SFX[];
 }
 
 export default Game;
