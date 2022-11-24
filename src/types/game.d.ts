@@ -1,4 +1,5 @@
 interface Game {
+  currentScreen: string;
   enableMusic: boolean;
   enableSounds: boolean;
   enablePostProcessing: boolean;

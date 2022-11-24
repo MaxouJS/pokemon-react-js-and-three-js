@@ -1,5 +1,6 @@
 // Packages
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, FC, ReactNode, SetStateAction, useEffect, useState } from 'react';
+import { SetterOrUpdater, useRecoilBridgeAcrossReactRoots_UNSTABLE, useRecoilState, useSetRecoilState } from 'recoil';
 import { Canvas } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 
@@ -12,17 +13,24 @@ import Scene from '../components/3d/Scene';
 import MapGenerator from '../components/utils/MapGenerator';
 import Animation from '../components/3d/Animation';
 
+// States
+import gameState from '../atoms/game';
+
 // Types
+import ScreenType from '../types/props/screen';
 import BattleType from '../types/battle';
 import PokemonType from '../types/pokemon';
-import ScreenType from '../types/props/screen';
-import Settings from '../components/2d/Settings';
+import GameType from '../types/game';
 
 const Battle: FC<ScreenType> = (props: ScreenType) => {
-  // props
-  const { changeBGM, changeScreen, game }: ScreenType = props;
+  // Allows wrapped components to access Recoil Root
+  const RecoilBridge: FC<{ children: ReactNode; }> = useRecoilBridgeAcrossReactRoots_UNSTABLE();
+
+  // Props
+  const { game }: ScreenType = props;
 
   // States
+  const setGame: SetterOrUpdater<GameType> = useSetRecoilState<GameType>(gameState);
   const [battle, setBattle]: [BattleType | null, Dispatch<SetStateAction<BattleType | null>>] = useState<BattleType | null>(null);
 
   useEffect((): void => {
