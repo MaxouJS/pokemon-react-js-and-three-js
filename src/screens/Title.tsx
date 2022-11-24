@@ -48,7 +48,7 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
   bgm();
 
   return (
-    <div className='absolute h-full w-full'>
+    <div className='absolute h-full w-full bg-black'>
       <Canvas>
         {/* Initializes UI */}
         <Html as='div' fullscreen className='flex select-none'>
@@ -64,6 +64,11 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
               <a href='https://github.com/MaxouJS/pokemon-react-js-and-three-js' target='_blank'>
                 <img src='./src/assets/icons/Github.png' className='h-12 drop-shadow hover:scale-110 duration-100' />
               </a>
+            </div>
+            <div className='text-xs drop-shadow lg:block hidden'>
+              <p className='flex justify-center text-xs font-bold'>Made by Maxence Gumiero (MaxouJS)</p>
+              <p className='flex justify-center text-xs text-black/25'>I am not affiliated to Nintendo or Pokémon Company,</p>
+              <p className='flex justify-center text-xs text-black/25'>All concepts, designs and sounds here are belong to Nintendo and The Pokémon Company</p>
             </div>
           </div>
         </Html>

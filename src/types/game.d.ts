@@ -4,8 +4,8 @@ import SFX from './props/sound/sfx';
 
 interface Game {
   currentScreen: string;
-  enableMusic: boolean;
-  enableSounds: boolean;
+  enableBGM: boolean;
+  enableSFX: boolean;
   enablePostProcessing: boolean;
   enableShadows: boolean;
   bgm: BGM[];

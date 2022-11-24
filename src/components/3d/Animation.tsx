@@ -6,6 +6,7 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils';
 // Types
 import AnimationType from '../../types/props/3d/animation';
 
+// Generic 3d animation component, allows to load and copy any 3d GLTF 3d animation
 const Animation: FC<AnimationType> = (props: AnimationType) => {
   // Props
   const { title, position, rotation, scale } = props;
@@ -37,5 +38,6 @@ const Animation: FC<AnimationType> = (props: AnimationType) => {
 // Preloads 3d models at the 3d canvas initializion
 useGLTF.preload('./src/assets/animations/OnixStance.glb');
 useGLTF.preload('./src/assets/animations/SquirtleStance.glb');
+useGLTF.preload('./src/assets/animations/Tree.glb');
 
 export default Animation;

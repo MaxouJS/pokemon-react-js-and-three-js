@@ -7,6 +7,7 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils';
 // Types
 import EnvironmentType from '../../types/props/3d/environment';
 
+// Generic 3d model component, allows to load and copy any 3d GLTF 3d model
 const Environment: FC<EnvironmentType> = (props: EnvironmentType) => {
   // Props
   const { title, position, rotation, scale } = props;
@@ -29,6 +30,7 @@ const Environment: FC<EnvironmentType> = (props: EnvironmentType) => {
 };
 
 // Preloads 3d models at the 3d canvas initializion
+useGLTF.preload('./src/assets/environments/Grassland.glb');
 useGLTF.preload('./src/assets/environments/Stadium.glb');
 
 export default Environment;

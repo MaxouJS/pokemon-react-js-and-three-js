@@ -15,6 +15,7 @@ const Card: FC<CardType> = (props: CardType) => {
         <span className='ml-auto text-sm'>Lv.{pokemon.currentLV}</span>
       </p>
       <div className='flex'>
+        {/* The HP bar changes depending on Pokemon current HP */}
         <span style={{width: `${Math.round(pokemon.currentHP * 100 / pokemon.maximumHP)}%`}} className='bg-gradient-to-r from-green-400 to-yellow-400 shadow shadow-neutral-900 ring-2 ring-neutral-900 h-2 mb-2'></span>
         <span style={{width: `${Math.round((pokemon.maximumHP - pokemon.currentHP) * 100 / pokemon.maximumHP)}%`}} className='bg-neutral-900 shadow shadow-neutral-900 ring-2 ring-neutral-900 h-2 mb-2'></span>
       </div>

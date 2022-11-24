@@ -87,7 +87,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
   }, [setBattle]);
 
   return (
-    <div className='absolute h-full w-full'>
+    <div className='absolute h-full w-full bg-black'>
       <Canvas>
         {/* Initializes UI */}
         <Html as='div' fullscreen className='select-none'>
@@ -120,7 +120,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
             enablePostProcessing={game.enablePostProcessing}
             enableShadows={game.enableShadows}
             blurMinimumDistance={0.1}
-            blurMaximumDistance={50}
+            blurMaximumDistance={30}
           />
           <StadiumGenerator />
           <Animation

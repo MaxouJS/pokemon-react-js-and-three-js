@@ -8,6 +8,7 @@ import gameState from '../../atoms/game';
 // Types
 import SettingsType from '../../types/props/2d/settings';
 import GameType from '../../types/game';
+import useSetBGM from '../../hooks/useSetBgm';
 
 const Settings: FC<SettingsType> = (props: SettingsType) => {
   // Props
@@ -15,7 +16,22 @@ const Settings: FC<SettingsType> = (props: SettingsType) => {
 
   // States
   const setGame: SetterOrUpdater<GameType> = useSetRecoilState<GameType>(gameState);
- 
+
+   // Functions
+  const toggleBGM = (): void => {
+    const newGame: GameType = {...game, enableBGM: !game.enableBGM};
+
+    // Toggles the post processing of the game global state
+    setGame(newGame);
+  };
+
+  const toggleSFX = (): void => {
+    const newGame: GameType = {...game, enableSFX: !game.enableSFX};
+
+    // Toggles the post processing of the game global state
+    setGame(newGame);
+  };
+
   // Functions
   const togglePostProcessing = (): void => {
     const newGame: GameType = {...game, enablePostProcessing: !game.enablePostProcessing};
@@ -32,11 +48,39 @@ const Settings: FC<SettingsType> = (props: SettingsType) => {
   };
 
   return (
-    <div className='absolute h-full w-full'>
-      <div className='flex w-full h-full p-8'>
+    <div className='absolute bottom-0 z-50'>
+      <div className='flex p-8'>
         <div className='mt-auto space-y-2 text-xs text-white drop-shadow'>
-          <div className='flex items-center space-x-2'>
-            <button onClick={togglePostProcessing} className='bg-black rounded shadow shadow-black/50 h-4 w-4'>
+          <button onClick={toggleBGM} className='flex items-center space-x-2'>
+            <span className='bg-black rounded shadow shadow-black/50 h-4 w-4'>
+              {
+                (
+                  game && game.enableBGM
+                ) ? (
+                  <span>X</span>
+                ) : (
+                  null
+                )
+              }
+            </span>
+            <span>Music</span>
+          </button>
+          <button onClick={toggleSFX} className='flex items-center space-x-2'>
+            <span className='bg-black rounded shadow shadow-black/50 h-4 w-4'>
+              {
+                (
+                  game && game.enableSFX
+                ) ? (
+                  <span>X</span>
+                ) : (
+                  null
+                )
+              }
+            </span>
+            <span>Sounds</span>
+          </button>
+          <button onClick={togglePostProcessing} className='flex items-center space-x-2'>
+            <span className='bg-black rounded shadow shadow-black/50 h-4 w-4'>
               {
                 (
                   game && game.enablePostProcessing
@@ -46,11 +90,11 @@ const Settings: FC<SettingsType> = (props: SettingsType) => {
                   null
                 )
               }
-            </button>
-            <span>Enable post processing effects</span>
-          </div>
-          <div className='flex items-center space-x-2'>
-            <button onClick={toggleShadows} className='bg-black rounded shadow shadow-black/50 h-4 w-4'>
+            </span>
+            <span>Post-Processing</span>
+          </button>
+          <button onClick={toggleShadows} className='flex items-center space-x-2'>
+            <span className='bg-black rounded shadow shadow-black/50 h-4 w-4'>
             {
               (
                 game && game.enableShadows
@@ -60,9 +104,9 @@ const Settings: FC<SettingsType> = (props: SettingsType) => {
                 null
               )
             }
-            </button>
-            <span>Enable shadows</span>
-          </div>
+            </span>
+            <span>Shadows</span>
+          </button>
         </div>
       </div>
     </div>

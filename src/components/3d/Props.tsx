@@ -7,6 +7,7 @@ import { clone } from 'three/examples/jsm/utils/SkeletonUtils';
 // Types
 import PropsType from '../../types/props/3d/props';
 
+// Generic 3d model component, allows to load and copy any 3d GLTF 3d model
 const Props: FC<PropsType> = (props: PropsType) => {
   // Props
   const { title, position, rotation, scale } = props;

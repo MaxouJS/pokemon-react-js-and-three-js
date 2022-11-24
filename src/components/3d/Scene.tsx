@@ -9,6 +9,7 @@ import SceneType from '../../types/props/3d/scene';
 import Light from './Light';
 import PostProcessing from './PostProcessing';
 
+// Splitting this code section allows to add specific effects to a specific screen
 const Scene: FC<SceneType> = (props: SceneType) => {
   // Props
   const { enablePostProcessing, enableShadows, blurMinimumDistance, blurMaximumDistance } = props;
