@@ -8,9 +8,11 @@ import { Html } from '@react-three/drei';
 // 2d
 import Settings from '../components/2d/Settings';
 // 3d
+import Animation from '../components/3d/Animation';
 import Camera from '../components/3d/Camera';
-import Environment from '../components/3d/Environment';
 import Scene from '../components/3d/Scene';
+// utils
+import GrasslandGenerator from '../components/utils/GrasslandGenerator';
 
 // States
 import gameState from '../atoms/game';
@@ -18,9 +20,9 @@ import gameState from '../atoms/game';
 // Types
 import ScreenType from '../types/props/screen';
 import GameType from '../types/game';
-import Props from '../components/3d/Props';
-import Animation from '../components/3d/Animation';
-import GrasslandGenerator from '../components/utils/GrasslandGenerator';
+
+// Hooks
+import useSetBGM from '../hooks/useSetBgm';
 
 const Title: FC<ScreenType> = (props: ScreenType) => {
   // Allows wrapped components to access Recoil Root
@@ -39,6 +41,11 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
     // Changes the current screen of the game global state
     setGame(newGame);
   };
+
+  // Sets the current BGM sound to 'Title' in the global state
+  const bgm = (): GameType => useSetBGM('Title');
+
+  bgm();
 
   return (
     <div className='absolute h-full w-full'>

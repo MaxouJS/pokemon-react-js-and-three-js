@@ -1,5 +1,5 @@
 interface SFX {
-  title: string;
+  sfxName: string;
   isPlayed: boolean;
 };
 

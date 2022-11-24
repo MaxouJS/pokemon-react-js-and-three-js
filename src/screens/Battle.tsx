@@ -9,10 +9,10 @@ import { Html } from '@react-three/drei';
 import Card from '../components/2d/Card';
 import Settings from '../components/2d/Settings';
 // 3d
+import Animation from '../components/3d/Animation';
 import Camera from '../components/3d/Camera';
 import Scene from '../components/3d/Scene';
 import StadiumGenerator from '../components/utils/StadiumGenerator';
-import Animation from '../components/3d/Animation';
 
 // States
 import gameState from '../atoms/game';
@@ -22,6 +22,9 @@ import ScreenType from '../types/props/screen';
 import BattleType from '../types/battle';
 import PokemonType from '../types/pokemon';
 import GameType from '../types/game';
+
+// Hooks
+import useSetBGM from '../hooks/useSetBgm';
 
 const Battle: FC<ScreenType> = (props: ScreenType) => {
   // Allows wrapped components to access Recoil Root
@@ -33,6 +36,11 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
   // States
   const setGame: SetterOrUpdater<GameType> = useSetRecoilState<GameType>(gameState);
   const [battle, setBattle]: [BattleType | null, Dispatch<SetStateAction<BattleType | null>>] = useState<BattleType | null>(null);
+
+  // Sets the current BGM sound to 'Title' in the global state
+  const bgm = (): GameType => useSetBGM('Battle');
+
+  bgm();
 
   useEffect((): void => {
     // Initializes a new team for the player

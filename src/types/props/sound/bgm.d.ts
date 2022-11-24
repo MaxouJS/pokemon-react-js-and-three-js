@@ -1,5 +1,5 @@
 interface BGM {
-  title: string;
+  bgmName: string;
   isPlayed: boolean;
 };
 

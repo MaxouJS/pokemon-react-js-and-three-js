@@ -4,23 +4,24 @@ import useSound from 'use-sound';
 import { ReturnedValue } from 'use-sound/dist/types';
 
 // Types
-import SFX from '../../types/props/sound/sfx';
+import SFXType from '../../types/props/sound/sfx';
 
-const SFX: FC<SFX> = (props: SFX) => {
+const SFX: FC<SFXType> = (props: SFXType) => {
   // Props
-  const {title, isPlayed}: SFX = props;
+  const { sfxName, isPlayed }: SFXType = props;
 
   // Initializes SFX sound
-  const [play, {stop}]: ReturnedValue = useSound(`./src/assets/sfx/${title}.wav`, { volume: 1, interrupt: true });
+  const [play, {stop}]: ReturnedValue = useSound(`./src/assets/sfx/${sfxName}.wav`, { volume: 1, interrupt: true });
 
   useEffect((): void => {
     {
-      (isPlayed)
-        ? (
-          play()
-        ) : (
-          stop()
-        )
+      (
+        isPlayed
+      ) ? (
+        play()
+      ) : (
+        stop()
+      )
     }
   }, [isPlayed, play, stop]);
 

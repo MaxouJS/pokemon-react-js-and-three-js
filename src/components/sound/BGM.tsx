@@ -4,23 +4,24 @@ import useSound from 'use-sound';
 import { ReturnedValue } from 'use-sound/dist/types';
 
 // Types
-import BGM from '../../types/props/sound/bgm';
+import BGMType from '../../types/props/sound/bgm';
 
-const BGM: FC<BGM> = (props: BGM) => {
+const BGM: FC<BGMType> = (props: BGMType) => {
   // Props
-  const {title, isPlayed}: BGM = props;
+  const { bgmName, isPlayed }: BGMType = props;
 
   // Initializes BGM sound
-  const [play, {stop}]: ReturnedValue = useSound(`./src/assets/bgm/${title}.wav`, { volume: 0.5, interrupt: true });
+  const [play, {stop}]: ReturnedValue = useSound(`./src/assets/bgm/${bgmName}.wav`, { volume: 0.5, interrupt: true });
 
   useEffect((): void => {
     {
-      (isPlayed)
-        ? (
-          play()
-        ) : (
-          stop()
-        )
+      (
+        isPlayed
+      ) ? (
+        play()
+      ) : (
+        stop()
+      )
     }
   }, [isPlayed, play, stop]);
 
