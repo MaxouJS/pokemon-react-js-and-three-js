@@ -7,6 +7,7 @@ import { Html } from '@react-three/drei';
 // Components
 // 2d
 import Card from '../components/2d/Card';
+import Settings from '../components/2d/Settings';
 // 3d
 import Camera from '../components/3d/Camera';
 import Scene from '../components/3d/Scene';
@@ -81,15 +82,20 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
     <div className='absolute h-full w-full'>
       <Canvas>
         {/* Initializes UI */}
-        <Html as='div' fullscreen className='flex select-none p-4'>
-          <Card
-            pokemon={battle?.team1[0] as PokemonType}
-            team={1}
-          />
-          <Card
-            pokemon={battle?.team2[0] as PokemonType}
-            team={2}
-          />
+        <Html as='div' fullscreen className='select-none'>
+          <RecoilBridge>
+            <Settings game={game} />
+          </RecoilBridge>
+          <div className='flex w-full p-4'>
+            <Card
+              pokemon={battle?.team1[0] as PokemonType}
+              team={1}
+            />
+            <Card
+              pokemon={battle?.team2[0] as PokemonType}
+              team={2}
+            />
+          </div>
         </Html>
         {/* Initializes 3d elements */}
         {/* Initializes camera props */}
