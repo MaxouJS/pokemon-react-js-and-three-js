@@ -18,6 +18,9 @@ import gameState from '../atoms/game';
 // Types
 import ScreenType from '../types/props/screen';
 import GameType from '../types/game';
+import Props from '../components/3d/Props';
+import Animation from '../components/3d/Animation';
+import GrasslandGenerator from '../components/utils/GrasslandGenerator';
 
 const Title: FC<ScreenType> = (props: ScreenType) => {
   // Allows wrapped components to access Recoil Root
@@ -60,7 +63,7 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
         {/* Initializes 3d elements */}
         {/* Initializes camera props */}
         <Camera
-          position={[0, -1.25, 2.5]}
+          position={[0, -1, 2.5]}
           rotation={[0, Math.PI * 1.5, 0]}
           enableRotate={false}
           minimumDistance={1}
@@ -72,9 +75,16 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
             enablePostProcessing={game.enablePostProcessing}
             enableShadows={game.enableShadows}
             blurMinimumDistance={0.01}
-            blurMaximumDistance={50}
+            blurMaximumDistance={10}
           />
-          <Environment title='Grassland' position={[0, 0, 0]} rotation={[0, Math.PI / 2, 0]} scale={[1, 1, 1]}  />
+          {/* Places manually some 3d animated elements */}
+          <Animation title={'SquirtleHi'} position={[-3, 0, -0.5]} rotation={[0, Math.PI * 0.4, 0]} scale={[1, 1, 1]} />
+          <Animation title={'Tree'} position={[-10, 0, -10]} rotation={[0, Math.PI / 1.5, 0]} scale={[1.25, 1.25, 1.25]} />
+          <Animation title={'Tree'} position={[-10, 0, -5]} rotation={[0, Math.PI / 1.5, 0]} scale={[1, 1, 1]} />
+          <Animation title={'Tree'} position={[-10, 0, 0]} rotation={[0, Math.PI / 1.5, 0]} scale={[1.5, 1.5, 1.5]} />
+          <Animation title={'Tree'} position={[-10, 0, 5]} rotation={[0, Math.PI / 1.5, 0]} scale={[1, 1, 1]} />
+          <Animation title={'Tree'} position={[-10, 0, 10]} rotation={[0, Math.PI / 1.5, 0]} scale={[1.25, 1.25, 1.25]} />
+          <GrasslandGenerator />
         </Camera>
       </Canvas>
     </div>

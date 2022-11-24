@@ -11,7 +11,7 @@ import Environment from '../3d/Environment';
 import Props from '../3d/Props';
 
 // In this project, the map generator is only used for generating random rocks, but you can use it to generates as many random elements you need for your scene
-const MapGenerator: FC = () => {
+const GrasslandGenerator: FC = () => {
   // States
   const [mapProps, setMapProps]: [PropsType[] | null, Dispatch<SetStateAction<PropsType[] | null>>] = useState<PropsType[] | null>(null);
   const [mapAnimatedProps, setMapAnimatedProps]: [AnimationType[] | null, Dispatch<SetStateAction<AnimationType[] | null>>] = useState<AnimationType[] | null>(null);
@@ -65,7 +65,7 @@ const MapGenerator: FC = () => {
     // Generates small rocks
     creatingElements(
       // Elements
-      50,
+      100,
       // Element name
       'Rock2',
       // Y axis position
@@ -73,35 +73,13 @@ const MapGenerator: FC = () => {
       // Y axis rotation
       true,
       // Minimum distance
-      5,
+      2.5,
       // Maximum distance
       40,
       // Minimum scale
       0.125,
       // Maximum scale
       0.25,
-      // Targeted array
-      newMapProps,
-    );
-
-    // Generates big rocks
-    creatingElements(
-      // Elements
-      10,
-      // Element name
-      'Rock1',
-      // Y axis position
-      -0.05,
-      // Y axis rotation
-      true,
-      // Minimum distance
-      7.5,
-      // Maximum distance
-      50,
-      // Minimum scale
-      1,
-      // Maximum scale
-      1.5,
       // Targeted array
       newMapProps,
     );
@@ -152,9 +130,9 @@ const MapGenerator: FC = () => {
           null
         )
       }
-      <Environment title={'Stadium'} position={[0, -0.05, 0]} rotation={[0, Math.PI / 1, 0]} scale={[2, 2, 2]} />
+      <Environment title={'Grassland'} position={[0, -0.05, 0]} rotation={[0, Math.PI / 1, 0]} scale={[2, 2, 2]} />
     </>
   );
 };
 
-export default MapGenerator;
+export default GrasslandGenerator;

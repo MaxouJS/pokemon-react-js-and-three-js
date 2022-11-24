@@ -11,7 +11,7 @@ import Settings from '../components/2d/Settings';
 // 3d
 import Camera from '../components/3d/Camera';
 import Scene from '../components/3d/Scene';
-import MapGenerator from '../components/utils/MapGenerator';
+import StadiumGenerator from '../components/utils/StadiumGenerator';
 import Animation from '../components/3d/Animation';
 
 // States
@@ -114,7 +114,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
             blurMinimumDistance={0.1}
             blurMaximumDistance={50}
           />
-          <MapGenerator />
+          <StadiumGenerator />
           <Animation
             title={battle?.team1[0].currentAnimation as string}
             position={battle?.team1[0].position as number[]}
