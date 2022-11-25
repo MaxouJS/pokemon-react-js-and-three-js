@@ -1,3 +1,5 @@
+import Move from "./move";
+
 interface Pokemon {
   pokemonName: string;
   currentLV: number;
@@ -10,6 +12,7 @@ interface Pokemon {
   rotation: number[];
   scale: number[];
   currentAnimation: string;
+  moves: MoveType[];
 };
 
 export default Pokemon;

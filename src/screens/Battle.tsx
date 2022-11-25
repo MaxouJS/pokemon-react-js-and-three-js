@@ -27,6 +27,8 @@ import GameType from '../types/game';
 
 // Hooks
 import useSetBGM from '../hooks/useSetBgm';
+import MoveType from '../types/move';
+import Move from '../components/2d/Move';
 
 const Battle: FC<ScreenType> = (props: ScreenType) => {
   // Allows wrapped components to access Recoil Root
@@ -58,6 +60,16 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
         rotation: [0, Math.PI * 1, 0],
         scale: [0.75, 0.75, 0.75],
         currentAnimation: 'SquirtleStance',
+        moves: [
+          {
+            moveName: 'Tackle',
+            damages: 1
+          },
+          {
+            moveName: 'Water Gun',
+            damages: 1
+          },
+        ],
       },
     ];
 
@@ -75,6 +87,16 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
         rotation: [0, Math.PI * 2, 0],
         scale: [1.5, 1.5, 1.5],
         currentAnimation: 'OnixStance',
+        moves: [
+          {
+            moveName: 'Tackle',
+            damages: 1
+          },
+          {
+            moveName: 'Rock Throw',
+            damages: 1
+          },
+        ],
       },
     ];
 
@@ -94,13 +116,41 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
     
     // Initializes the battle
     const newBattle: BattleType = {
-      textBox: 'Click and hold to rotate the camera.',
+      textBox: '',
       enableUI: false,
       team1: newTeam(newTeam1),
       team2: newTeam(newTeam2),
     };
 
     setBattle(newBattle);
+
+    let newTextBox: string = 'You are challenged by Gym Leader Brock!';
+
+    setBattle({...newBattle, textBox: newTextBox,});
+
+    setTimeout((): void => {
+      let newTextBox: string = 'Gym Leader Brock sent out Onix!';
+
+      setBattle({...newBattle, textBox: newTextBox,});
+    }, 2500);
+
+    setTimeout((): void => {
+      let newTextBox: string = 'Go! Squirtle!';
+
+      setBattle({...newBattle, textBox: newTextBox,});
+    }, 5000);
+
+    setTimeout((): void => {
+      let newTextBox: string = '(You can click and hold to rotate the camera.)';
+
+      setBattle({...newBattle, textBox: newTextBox,});
+    }, 7500);
+
+    setTimeout((): void => {
+      let newTextBox: string = '';
+
+      setBattle({...newBattle, textBox: newTextBox, enableUI: true,});
+    }, 10000);
   }, [setBattle]);
 
   return (
@@ -108,10 +158,10 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
       <Canvas>
         {/* Initializes UI */}
         <Html as='div' fullscreen className='select-none'>
-          {/* Checks if the game props and the battle state exists then displays the text box with its parameter contained in the battle global state */}
+          {/* Checks if the battle state exists then displays the text box with its parameter contained in the battle global state */}
           {
             (
-              game && battle?.textBox
+              battle?.textBox
             ) ? (
               <RecoilBridge>
                 <Text
@@ -124,22 +174,13 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
               null
             )
           }
-          {/* Checks if the game props exists then displays the settings box */}
-          {
-            (
-              game
-            ) ? (
-              <RecoilBridge>
-                <Settings game={game} />
-              </RecoilBridge>
-            ) : (
-              null
-            )
-          }
+          <RecoilBridge>
+            <Settings game={game} />
+          </RecoilBridge>
           {/* Checks if the battle state exists then displays the Pokémon cards with their parameters contained in the battle global state */}
           {
             (
-              battle?.team1 && battle?.team2
+              battle?.enableUI && battle?.team1 && battle?.team2
             ) ? (
               <>
                 <div className='flex w-full p-4'>
@@ -157,6 +198,26 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
               null
             )
           }
+          {/* Checks if the battle state exists then displays the Pokémon moves with their parameters contained in the battle global state */}
+          {
+            (
+              battle?.enableUI && battle?.team1
+            ) ? (
+              <div className='absolute bottom-0 right-0'>
+                <div className='flex flex-col p-4 space-y-4'>
+                  {
+                    battle?.team1[0].moves.map((m: MoveType, i: number) => {
+                      return (
+                        <Move key={i} move={m} />
+                      );
+                    })
+                  }
+                </div>
+              </div>
+            ) : (
+              null
+            )
+          }
         </Html>
         {/* Initializes 3d elements */}
         {/* Initializes camera props */}
@@ -169,21 +230,12 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
           maximumPolarAngle={Math.PI * 0.5}
         >
           {/* Initializes scene props */}
-          {/* Checks if the game props exists then displays the 3d scene and its parameters */}
-          {
-            (
-              game
-            ) ? (  
-              <Scene
-                enablePostProcessing={game.enablePostProcessing}
-                enableShadows={game.enableShadows}
-                blurMinimumDistance={0.1}
-                blurMaximumDistance={30}
-              />
-            ) : (
-              null
-            )
-          }
+          <Scene
+            enablePostProcessing={game.enablePostProcessing}
+            enableShadows={game.enableShadows}
+            blurMinimumDistance={0.1}
+            blurMaximumDistance={30}
+          />
           <StadiumGenerator />
           {/* Checks if the battle state exists then displays the Pokémon 3d animations with their parameters contained in the battle global state */}
           {
