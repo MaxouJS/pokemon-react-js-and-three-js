@@ -8,6 +8,7 @@ import { Html } from '@react-three/drei';
 // 2d
 import Card from '../components/2d/Card';
 import Settings from '../components/2d/Settings';
+import Text from '../components/2d/TextBox';
 // 3d
 import Animation from '../components/3d/Animation';
 import Camera from '../components/3d/Camera';
@@ -15,6 +16,7 @@ import Scene from '../components/3d/Scene';
 import StadiumGenerator from '../components/utils/StadiumGenerator';
 
 // States
+import battleState from '../atoms/battle';
 import gameState from '../atoms/game';
 
 // Types
@@ -25,7 +27,6 @@ import GameType from '../types/game';
 
 // Hooks
 import useSetBGM from '../hooks/useSetBgm';
-import Text from '../components/2d/TextBox';
 
 const Battle: FC<ScreenType> = (props: ScreenType) => {
   // Allows wrapped components to access Recoil Root
@@ -36,9 +37,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
 
   // States
   const setGame: SetterOrUpdater<GameType> = useSetRecoilState<GameType>(gameState);
-  const [battle, setBattle]: [BattleType | null, Dispatch<SetStateAction<BattleType | null>>] = useState<BattleType | null>(null);
-  const [text, setText]: [string | null, Dispatch<SetStateAction<string | null>>] = useState<string | null>(null);
-  const [toggleUI, setToggleUI]: [boolean | null, Dispatch<SetStateAction<boolean | null>>] = useState<boolean | null>(null);
+  const [battle, setBattle]: [BattleType, SetterOrUpdater<BattleType>] = useRecoilState<BattleType>(battleState);
 
   // Hooks
   // Sets the current BGM sound played to 'Battle' to the global game state
@@ -109,30 +108,55 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
       <Canvas>
         {/* Initializes UI */}
         <Html as='div' fullscreen className='select-none'>
+          {/* Checks if the game props and the battle state exists then displays the text box with its parameter contained in the battle global state */}
           {
             (
-              text
+              game && battle?.textBox
             ) ? (
               <RecoilBridge>
-                <Text text={battle?.textBox as string} />
+                <Text
+                  text={battle?.textBox as string}
+                  battle={battle}
+                  game={game}
+                />
               </RecoilBridge>
             ) : (
               null
             )
           }
-          <RecoilBridge>
-            <Settings game={game} />
-          </RecoilBridge>
-          <div className='flex w-full p-4'>
-            <Card
-              pokemon={battle?.team1[0] as PokemonType}
-              team={1}
-            />
-            <Card
-              pokemon={battle?.team2[0] as PokemonType}
-              team={2}
-            />
-          </div>
+          {/* Checks if the game props exists then displays the settings box */}
+          {
+            (
+              game
+            ) ? (
+              <RecoilBridge>
+                <Settings game={game} />
+              </RecoilBridge>
+            ) : (
+              null
+            )
+          }
+          {/* Checks if the battle state exists then displays the Pokémon cards with their parameters contained in the battle global state */}
+          {
+            (
+              battle?.team1 && battle?.team2
+            ) ? (
+              <>
+                <div className='flex w-full p-4'>
+                  <Card
+                    pokemon={battle?.team1[0] as PokemonType}
+                    team={1}
+                  />
+                  <Card
+                    pokemon={battle?.team2[0] as PokemonType}
+                    team={2}
+                  />
+                </div>
+              </>
+            ) : (
+              null
+            )
+          }
         </Html>
         {/* Initializes 3d elements */}
         {/* Initializes camera props */}
@@ -145,25 +169,45 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
           maximumPolarAngle={Math.PI * 0.5}
         >
           {/* Initializes scene props */}
-          <Scene
-            enablePostProcessing={game.enablePostProcessing}
-            enableShadows={game.enableShadows}
-            blurMinimumDistance={0.1}
-            blurMaximumDistance={30}
-          />
+          {/* Checks if the game props exists then displays the 3d scene and its parameters */}
+          {
+            (
+              game
+            ) ? (  
+              <Scene
+                enablePostProcessing={game.enablePostProcessing}
+                enableShadows={game.enableShadows}
+                blurMinimumDistance={0.1}
+                blurMaximumDistance={30}
+              />
+            ) : (
+              null
+            )
+          }
           <StadiumGenerator />
-          <Animation
-            title={battle?.team1[0].currentAnimation as string}
-            position={battle?.team1[0].position as number[]}
-            rotation={battle?.team1[0].rotation as number[]}
-            scale={battle?.team1[0].scale as number[]}
-          />
-          <Animation
-            title={battle?.team2[0].currentAnimation as string}
-            position={battle?.team2[0].position as number[]}
-            rotation={battle?.team2[0].rotation as number[]}
-            scale={battle?.team2[0].scale as number[]}
-          />
+          {/* Checks if the battle state exists then displays the Pokémon 3d animations with their parameters contained in the battle global state */}
+          {
+            (
+              battle?.team1 && battle?.team2
+            ) ? (
+              <>
+                <Animation
+                  title={battle?.team1[0].currentAnimation as string}
+                  position={battle?.team1[0].position as number[]}
+                  rotation={battle?.team1[0].rotation as number[]}
+                  scale={battle?.team1[0].scale as number[]}
+                />
+                <Animation
+                  title={battle?.team2[0].currentAnimation as string}
+                  position={battle?.team2[0].position as number[]}
+                  rotation={battle?.team2[0].rotation as number[]}
+                  scale={battle?.team2[0].scale as number[]}
+                />
+              </>
+            ) : (
+              null
+            )
+          }
         </Camera>
       </Canvas>
     </div>
