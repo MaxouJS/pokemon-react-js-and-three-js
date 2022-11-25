@@ -25,6 +25,7 @@ import GameType from '../types/game';
 
 // Hooks
 import useSetBGM from '../hooks/useSetBgm';
+import Text from '../components/2d/TextBox';
 
 const Battle: FC<ScreenType> = (props: ScreenType) => {
   // Allows wrapped components to access Recoil Root
@@ -36,7 +37,10 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
   // States
   const setGame: SetterOrUpdater<GameType> = useSetRecoilState<GameType>(gameState);
   const [battle, setBattle]: [BattleType | null, Dispatch<SetStateAction<BattleType | null>>] = useState<BattleType | null>(null);
+  const [text, setText]: [string | null, Dispatch<SetStateAction<string | null>>] = useState<string | null>(null);
+  const [toggleUI, setToggleUI]: [boolean | null, Dispatch<SetStateAction<boolean | null>>] = useState<boolean | null>(null);
 
+  // Hooks
   // Sets the current BGM sound played to 'Battle' to the global game state
   useSetBGM('Battle');
 
@@ -46,8 +50,8 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
       {
         pokemonName: 'Squirtle',
         currentLV: 7,
-        currentHP: 10,
-        maximumHP: 10,
+        currentHP: 1,
+        maximumHP: 1,
         attack: 1,
         defense: 1,
         speed: 1,
@@ -63,8 +67,8 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
       {
         pokemonName: 'Onix',
         currentLV: 14,
-        currentHP: 10,
-        maximumHP: 10,
+        currentHP: 1,
+        maximumHP: 1,
         attack: 1,
         defense: 1,
         speed: 1,
@@ -75,10 +79,26 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
       },
     ];
 
+    const newTeam = (array: PokemonType[]): PokemonType[] => {
+      // Creates new random characteristics for each Pokémon the team passed as argument
+      array.forEach((n: PokemonType): void => {
+        n.currentHP = n.currentLV + Math.floor(Math.random() * n.currentLV + 1);
+        n.maximumHP = n.currentHP;
+        n.attack = n.currentLV + Math.floor(Math.random() * n.currentLV + 1);
+        n.defense = n.currentLV + Math.floor(Math.random() * n.currentLV + 1);
+        n.speed = n.currentLV + Math.floor(Math.random() * n.currentLV + 1);
+      });
+
+      // Returns all the Pokémon with the new characteristics
+      return array;
+    };
+    
     // Initializes the battle
     const newBattle: BattleType = {
-      team1: newTeam1,
-      team2: newTeam2,
+      textBox: 'Click and hold to rotate the camera.',
+      enableUI: false,
+      team1: newTeam(newTeam1),
+      team2: newTeam(newTeam2),
     };
 
     setBattle(newBattle);
@@ -89,6 +109,17 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
       <Canvas>
         {/* Initializes UI */}
         <Html as='div' fullscreen className='select-none'>
+          {
+            (
+              text
+            ) ? (
+              <RecoilBridge>
+                <Text text={battle?.textBox as string} />
+              </RecoilBridge>
+            ) : (
+              null
+            )
+          }
           <RecoilBridge>
             <Settings game={game} />
           </RecoilBridge>

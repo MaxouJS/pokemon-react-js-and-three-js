@@ -97,7 +97,7 @@ const StadiumGenerator: FC = () => {
       // Minimum distance
       7.5,
       // Maximum distance
-      50,
+      40,
       // Minimum scale
       1,
       // Maximum scale

@@ -1,4 +1,5 @@
 // Packages
+import { Sky } from '@react-three/drei';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 
 // Types
@@ -65,7 +66,7 @@ const GrasslandGenerator: FC = () => {
     // Generates small rocks
     creatingElements(
       // Elements
-      100,
+      50,
       // Element name
       'Rock2',
       // Y axis position
@@ -82,6 +83,50 @@ const GrasslandGenerator: FC = () => {
       0.25,
       // Targeted array
       newMapProps,
+    );
+
+    // Generates flowers
+    creatingElements(
+      // Elements
+      50,
+      // Element name
+      'Flower',
+      // Y axis position
+      0,
+      // Y axis rotation
+      false,
+      // Minimum distance
+      2.5,
+      // Maximum distance
+      40,
+      // Minimum scale
+      1,
+      // Maximum scale
+      5,
+      // Targeted array
+      newMapAnimatedProps,
+    );
+
+    // Generates weeds
+    creatingElements(
+      // Elements
+      100,
+      // Element name
+      'Weeds',
+      // Y axis position
+      0,
+      // Y axis rotation
+      false,
+      // Minimum distance
+      2.5,
+      // Maximum distance
+      25,
+      // Minimum scale
+      0.5,
+      // Maximum scale
+      2,
+      // Targeted array
+      newMapAnimatedProps,
     );
 
     setMapProps(newMapProps);
@@ -130,7 +175,7 @@ const GrasslandGenerator: FC = () => {
           null
         )
       }
-      <Environment title={'Grassland'} position={[0, -0.05, 0]} rotation={[0, Math.PI / 1, 0]} scale={[2, 2, 2]} />
+      <Environment title={'Grassland'} position={[0, -0.01, 0]} rotation={[0, Math.PI / 1.5, 0]} scale={[2, 2, 2]} />
     </>
   );
 };

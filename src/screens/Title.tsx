@@ -61,20 +61,21 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
           <RecoilBridge>
             <Settings game={game} />
           </RecoilBridge>
-          <div className='flex flex-col justify-center mt-auto w-full space-y-8 p-8'>
-            <button onClick={changeScreen} className='text-2xl uppercase text-white font-bowlby-one animate-pulse lg:text-6xl md:text-4xl'>Click or tap to play</button>
+          <div className='flex flex-col justify-center w-full md:space-y-8 space-y-4 p-8'>
+            <img src='./src/assets/images/Logo.png' className='flex mb-auto h-64 w-64' />
+            <button onClick={changeScreen} className='text-2xl uppercase text-white font-bowlby-one animate-pulse lg:text-6xl md:text-4xl hover:scale-110 hover:animate-none duration-100'>Click to play</button>
             <div className='flex justify-center space-x-4'>
               <a href='https://www.linkedin.com/in/maxence-gumiero-47a048181/' target='_blank'>
-                <img src='./src/assets/icons/Linkedin.png' className='h-12 drop-shadow hover:scale-110 duration-100' />
+                <img src='./src/assets/icons/Linkedin.png' className='md:h-12 h-8 drop-shadow hover:scale-110 duration-100' />
               </a>
               <a href='https://github.com/MaxouJS/pokemon-react-js-and-three-js' target='_blank'>
-                <img src='./src/assets/icons/Github.png' className='h-12 drop-shadow hover:scale-110 duration-100' />
+                <img src='./src/assets/icons/Github.png' className='md:h-12 h-8 drop-shadow hover:scale-110 duration-100' />
               </a>
             </div>
             <div className='text-xs drop-shadow lg:block hidden'>
               <p className='flex justify-center text-xs font-bold'>Made by Maxence Gumiero (MaxouJS)</p>
               <p className='flex justify-center text-xs text-black/25'>I am not affiliated to Nintendo or Pokémon Company,</p>
-              <p className='flex justify-center text-xs text-black/25'>All concepts, designs and sounds here are belong to Nintendo and The Pokémon Company</p>
+              <p className='flex justify-center text-xs text-black/25'>All concepts, designs and sounds here are belong to Nintendo and Pokémon Company</p>
             </div>
           </div>
         </Html>
@@ -97,11 +98,11 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
           />
           {/* Places manually some 3d animated elements */}
           <Animation title={'SquirtleHi'} position={[-3, 0, -0.5]} rotation={[0, Math.PI * 0.4, 0]} scale={[1, 1, 1]} />
-          <Animation title={'Tree'} position={[-10, 0, -10]} rotation={[0, Math.PI / 1.5, 0]} scale={[1.25, 1.25, 1.25]} />
-          <Animation title={'Tree'} position={[-10, 0, -5]} rotation={[0, Math.PI / 1.5, 0]} scale={[1, 1, 1]} />
-          <Animation title={'Tree'} position={[-10, 0, 0]} rotation={[0, Math.PI / 1.5, 0]} scale={[1.5, 1.5, 1.5]} />
-          <Animation title={'Tree'} position={[-10, 0, 5]} rotation={[0, Math.PI / 1.5, 0]} scale={[1, 1, 1]} />
-          <Animation title={'Tree'} position={[-10, 0, 10]} rotation={[0, Math.PI / 1.5, 0]} scale={[1.25, 1.25, 1.25]} />
+          <Animation title={'Tree'} position={[-9, -0.1, -10]} rotation={[0, Math.PI / 2, 0]} scale={[1.25, 1.25, 1.25]} />
+          <Animation title={'Tree'} position={[-10, -0.1, -6]} rotation={[0, Math.PI / 2, 0]} scale={[1, 1, 1]} />
+          <Animation title={'Tree'} position={[-10, -0.1, 0]} rotation={[0, Math.PI / 2, 0]} scale={[1.5, 1.5, 1.5]} />
+          <Animation title={'Tree'} position={[-10, -0.1, 6]} rotation={[0, Math.PI / 2, 0]} scale={[1, 1, 1]} />
+          <Animation title={'Tree'} position={[-9, -0.1, 10]} rotation={[0, Math.PI / 2, 0]} scale={[1.25, 1.25, 1.25]} />
           <GrasslandGenerator />
         </Camera>
       </Canvas>
