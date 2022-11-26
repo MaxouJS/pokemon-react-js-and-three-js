@@ -117,40 +117,42 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
     // Initializes the battle
     const newBattle: BattleType = {
       textBox: '',
-      enableUI: false,
+      enableUI: true,
       team1: newTeam(newTeam1),
       team2: newTeam(newTeam2),
     };
 
     setBattle(newBattle);
 
+    /*
     let newTextBox: string = 'You are challenged by Gym Leader Brock!';
 
     setBattle({...newBattle, textBox: newTextBox,});
 
     setTimeout((): void => {
-      let newTextBox: string = 'Gym Leader Brock sent out Onix!';
+      newTextBox: string = 'Gym Leader Brock sent out Onix!';
 
       setBattle({...newBattle, textBox: newTextBox,});
     }, 2500);
 
     setTimeout((): void => {
-      let newTextBox: string = 'Go! Squirtle!';
+      newTextBox: string = 'Go! Squirtle!';
 
       setBattle({...newBattle, textBox: newTextBox,});
     }, 5000);
 
     setTimeout((): void => {
-      let newTextBox: string = '(You can click and hold to rotate the camera.)';
+      newTextBox: string = '(You can click and hold to rotate the camera.)';
 
       setBattle({...newBattle, textBox: newTextBox,});
     }, 7500);
 
     setTimeout((): void => {
-      let newTextBox: string = '';
+      newTextBox: string = '';
 
       setBattle({...newBattle, textBox: newTextBox, enableUI: true,});
     }, 10000);
+    */
   }, [setBattle]);
 
   return (
@@ -208,7 +210,9 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
                   {
                     battle?.team1[0].moves.map((m: MoveType, i: number) => {
                       return (
-                        <Move key={i} move={m} />
+                        <RecoilBridge key={i}>
+                          <Move move={m} battle={battle} />
+                        </RecoilBridge>
                       );
                     })
                   }

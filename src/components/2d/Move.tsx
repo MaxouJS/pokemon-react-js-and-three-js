@@ -1,15 +1,70 @@
 // Packages
 import { FC } from 'react';
+import { SetterOrUpdater, useSetRecoilState } from 'recoil';
+
+// States
+import battleState from '../../atoms/battle';
 
 // Types
-import MoveType from '../../types/props/2d/move';
+import MovePropsType from '../../types/props/2d/move';
+import BattleType from '../../types/battle';
+import PokemonType from '../../types/pokemon';
+import MoveType from '../../types/move';
 
-const Move: FC<MoveType> = (props: MoveType) => {
+const Move: FC<MovePropsType> = (props: MovePropsType) => {
   // Props
-  const { move }: MoveType = props;
+  const { move, battle }: MovePropsType = props;
+
+  // States
+  const setBattle: SetterOrUpdater<BattleType> = useSetRecoilState<BattleType>(battleState);
+
+  // Functions
+  const useMove = (): void => {
+    // Copies Pokemon and their teams
+    let newTeam1: PokemonType[] = [...battle.team1];
+    let newSquirtle: PokemonType = {...battle.team1[0]};
+    let newTeam2: PokemonType[] = [...battle.team2];
+    let newOnix: PokemonType = {...battle.team2[0]};
+
+    // Selects a random move for Onix
+    const onixMove: MoveType = newOnix.moves[Math.floor(Math.random() * 2)];
+
+    // Creates a random damages number based on Squirtle properties
+    const squirtleDamages: number = Math.floor(newSquirtle.currentLV * move.damages * 0.5);
+    // Creates a random damages number based on Onix properties
+    const onixDamages: number = Math.floor(newOnix.currentLV * onixMove.damages * 0.5);
+
+    newOnix.currentHP -= squirtleDamages;
+    newTeam2[0] = newOnix;
+
+    newSquirtle.currentHP -= onixDamages;
+    newTeam1[0] = newSquirtle;
+
+    {
+      (
+        newSquirtle.currentHP < 0
+      ) ? (
+        newSquirtle.currentHP = 0
+      ) : (
+        newSquirtle.currentHP
+      )
+    }
+
+    {
+      (
+        newOnix.currentHP < 0
+      ) ? (
+        newOnix.currentHP = 0
+      ) : (
+        newOnix.currentHP
+      )
+    }
+
+    setBattle({...battle, team1: [...newTeam1], team2: [...newTeam2]});
+  }
   
   return (
-    <button className='bg-gradient-to-r from-cyan-400 to-green-400 shadow-xl shadow-green-400/50 rounded-xl ring-2 ring-cyan-400/50 md:w-64 w-48 p-2 text-white text-sm font-bold drop-shadow hover:scale-110 duration-100'>
+    <button onClick={useMove} className='bg-gradient-to-r from-cyan-400 to-green-400 shadow-xl shadow-green-400/50 rounded-xl ring-2 ring-cyan-400/50 md:w-64 w-48 p-2 text-white text-sm font-bold drop-shadow hover:scale-105 duration-100'>
       <p>{move.moveName}</p>
     </button>
   );

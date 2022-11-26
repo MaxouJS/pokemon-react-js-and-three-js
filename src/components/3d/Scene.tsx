@@ -33,7 +33,8 @@ const Scene: FC<SceneType> = (props: SceneType) => {
       {/* Three components */}
       {/* Shadows are not casted over 25 meters for increasing the framerate */}
       {
-        (enableShadows
+        (
+          enableShadows
         ) ? (
           <ContactShadows
             position={[0, 0, 0]}
