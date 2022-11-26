@@ -14,7 +14,7 @@ const Animation: FC<AnimationType> = (props: AnimationType) => {
   // Initializes this GTLF scene and its animations
   let { scene, animations }: any = useGLTF(`./src/assets/animations/${title}.glb`);
   
-  // Allows this animation to be used multiple times
+  // Allows this 3d animation to be used as many times as required
   scene = useMemo(() => clone(scene), [scene]);
   
   // Initializes actions
@@ -29,7 +29,8 @@ const Animation: FC<AnimationType> = (props: AnimationType) => {
     // Plays the animation in loop
     actions.ArmatureAction.play();
   }, [actions, scene]);
- 
+  
+  // Using a primitive is the easiest way to load a custom 3d animation. Using meshes can be hard to manage in this case
   return (
     <primitive position={position} rotation={rotation} scale={scale} object={scene} />
   );

@@ -16,7 +16,6 @@ const Scene: FC<SceneType> = (props: SceneType) => {
   
   return (
     <>
-      {/* Custom components */}
       <Light />
       {
         (
@@ -30,8 +29,7 @@ const Scene: FC<SceneType> = (props: SceneType) => {
           null
         )
       }
-      {/* Three components */}
-      {/* Shadows are not casted over 25 meters for increasing the framerate */}
+      {/* Shadows are not casted over 25 meters to increase the framerate */}
       {
         (
           enableShadows

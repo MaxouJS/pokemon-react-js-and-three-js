@@ -35,6 +35,7 @@ const useSetBGM = (bgmName: string) => {
       };
     });
 
+    // Sets all the new BGM list to the game global state
     setGame({...game, bgm: newBGM});
     
   }, [setGame]);

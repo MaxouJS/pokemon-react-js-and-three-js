@@ -14,7 +14,8 @@ const Props: FC<PropsType> = (props: PropsType) => {
   
   // Initializes this GTLF scene
   let { scene }: any = useGLTF(`./src/assets/props/${title}.glb`);
-
+  
+  // Allows this 3d model to be used as many times as required
   scene = useMemo((): Object3D<Event> => clone(scene), [scene]);
       
   useEffect((): void => {
@@ -24,6 +25,7 @@ const Props: FC<PropsType> = (props: PropsType) => {
     });
   }, [scene]);
  
+  // Using a primitive is the easiest way to load a custom 3d model. Using meshes can be hard to manage in this case
   return (
     <primitive position={position} rotation={rotation} scale={scale} object={scene} />
   );

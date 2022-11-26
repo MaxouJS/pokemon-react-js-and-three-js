@@ -7,10 +7,11 @@ import CameraType from '../../types/props/3d/camera';
 
 const Camera: FC<CameraType> = (props: CameraType) => {
   // Props
-  const {children, position, rotation, enableRotate, minimumDistance, maximumDistance, maximumPolarAngle} = props;
+  const { children, position, rotation, enableRotate, minimumDistance, maximumDistance, maximumPolarAngle } = props;
   
   return (
     <>
+      {/* Creates an Orbit Controls camera that is the easiest camera to use */}
       <OrbitControls
         enablePan={false}
         enableDamping={true}
@@ -19,7 +20,8 @@ const Camera: FC<CameraType> = (props: CameraType) => {
         maxDistance={maximumDistance}
         maxPolarAngle={maximumPolarAngle}
       />
-      {/* @ts-ignore */}
+      {/* Creates a perspective camera that uses passed as props parameters */}  
+      {/* @ts-ignore, we use here an array of number instead of a Vector3, that is working as well */}
       <PerspectiveCamera position={position} rotation={rotation} >
         {children}
       </PerspectiveCamera>

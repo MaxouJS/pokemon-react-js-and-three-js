@@ -247,6 +247,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
               battle?.team1
             ) ? (
               <>
+                {/* That is not possible to load an animation just with its file name, you need to display or hide it */}
                 {
                   battle?.team1[0].currentAnimation === 'SquirtleStance'
                   ?
@@ -276,11 +277,13 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
               null
             )
           }
+          {/* Checks if the battle state exists then displays the Pokémon 3d animations with their parameters contained in the battle global state */}
           {
             (
               battle?.team2
             ) ? (
               <>
+                {/* That is not possible to load an animation just with its file name, you need to display or hide it */} 
                 {
                   battle?.team2[0].currentAnimation === 'OnixStance'
                   ?
