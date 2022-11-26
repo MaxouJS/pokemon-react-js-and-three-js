@@ -244,21 +244,67 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
           {/* Checks if the battle state exists then displays the Pokémon 3d animations with their parameters contained in the battle global state */}
           {
             (
-              battle?.team1 && battle?.team2
+              battle?.team1
             ) ? (
               <>
-                <Animation
-                  title={battle?.team1[0].currentAnimation as string}
-                  position={battle?.team1[0].position as number[]}
-                  rotation={battle?.team1[0].rotation as number[]}
-                  scale={battle?.team1[0].scale as number[]}
-                />
-                <Animation
-                  title={battle?.team2[0].currentAnimation as string}
-                  position={battle?.team2[0].position as number[]}
-                  rotation={battle?.team2[0].rotation as number[]}
-                  scale={battle?.team2[0].scale as number[]}
-                />
+                {
+                  battle?.team1[0].currentAnimation === 'SquirtleStance'
+                  ?
+                  <Animation
+                    title='SquirtleStance'
+                    position={battle?.team1[0].position as number[]}
+                    rotation={battle?.team1[0].rotation as number[]}
+                    scale={battle?.team1[0].scale as number[]}
+                  />
+                  :
+                  null
+                }
+                {
+                  battle?.team1[0].currentAnimation === 'SquirtleAttack'
+                  ?
+                  <Animation
+                    title='SquirtleAttack'
+                    position={battle?.team1[0].position as number[]}
+                    rotation={battle?.team1[0].rotation as number[]}
+                    scale={battle?.team1[0].scale as number[]}
+                  />
+                  :
+                  null
+                }
+              </>
+            ) : (
+              null
+            )
+          }
+          {
+            (
+              battle?.team2
+            ) ? (
+              <>
+                {
+                  battle?.team2[0].currentAnimation === 'OnixStance'
+                  ?
+                  <Animation
+                    title='OnixStance'
+                    position={battle?.team2[0].position as number[]}
+                    rotation={battle?.team2[0].rotation as number[]}
+                    scale={battle?.team2[0].scale as number[]}
+                  />
+                  :
+                  null
+                }
+                {
+                  battle?.team2[0].currentAnimation === 'OnixAttack'
+                  ?
+                  <Animation
+                    title='OnixAttack'
+                    position={battle?.team2[0].position as number[]}
+                    rotation={battle?.team2[0].rotation as number[]}
+                    scale={battle?.team2[0].scale as number[]}
+                  />
+                  :
+                  null
+                }
               </>
             ) : (
               null

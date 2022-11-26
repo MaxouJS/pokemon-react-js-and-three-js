@@ -35,10 +35,10 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
     const onixDamages: number = Math.floor(newOnix.currentLV * onixMove.damages * 0.5);
 
     newOnix.currentHP -= squirtleDamages;
-    newTeam2[0] = newOnix;
+    newTeam2[0] = {...newOnix, currentAnimation: 'OnixAttack'};
 
     newSquirtle.currentHP -= onixDamages;
-    newTeam1[0] = newSquirtle;
+    newTeam1[0] = {...newSquirtle, currentAnimation: 'SquirtleAttack'};
 
     {
       (
@@ -61,6 +61,7 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
     }
 
     setBattle({...battle, team1: [...newTeam1], team2: [...newTeam2]});
+    
   }
   
   return (
