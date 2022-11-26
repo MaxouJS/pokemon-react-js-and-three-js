@@ -20,6 +20,7 @@ const Animation: FC<AnimationType> = (props: AnimationType) => {
   // Initializes actions
   const { actions }: any = useAnimations(animations, scene);
    
+  // Hooks
   useEffect((): void => {
     // Resolves the clipping bug on some camera angles
     scene.traverse((child: any) => {

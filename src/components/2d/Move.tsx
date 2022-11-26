@@ -61,6 +61,13 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
     }
 
     setBattle({...battle, team1: [...newTeam1], team2: [...newTeam2]});
+
+    setTimeout((): void => {
+      newTeam1[0] = {...newSquirtle, currentAnimation: 'SquirtleStance'};
+      newTeam2[0] = {...newOnix, currentAnimation: 'OnixStance'};
+
+      setBattle({...battle, team1: [...newTeam1], team2: [...newTeam2]});
+    }, 1700);
     
   }
   

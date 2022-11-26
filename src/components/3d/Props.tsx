@@ -14,10 +14,11 @@ const Props: FC<PropsType> = (props: PropsType) => {
   
   // Initializes this GTLF scene
   let { scene }: any = useGLTF(`./src/assets/props/${title}.glb`);
-  
+
   // Allows this 3d model to be used as many times as required
   scene = useMemo((): Object3D<Event> => clone(scene), [scene]);
-      
+   
+  // Hooks   
   useEffect((): void => {
     // Resolves the clipping bug on some camera angles
     scene.traverse((child: any) => {
