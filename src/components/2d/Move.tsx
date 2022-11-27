@@ -38,9 +38,14 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
     const onixMove: MoveType = newOnix.moves[Math.floor(Math.random() * 2)];
 
     // Creates a random damages number based on Squirtle properties
-    const squirtleDamages: number = Math.floor(newSquirtle.currentLV * move.damages * 0.5);
+    const squirtleDamages: number = Math.floor(newSquirtle.currentLV * move.damages * 0.25);
     // Creates a random damages number based on Onix properties
-    const onixDamages: number = Math.floor(newOnix.currentLV * onixMove.damages * 0.5);
+    const onixDamages: number = Math.floor(newOnix.currentLV * onixMove.damages * 0.25);
+
+    setBattle({
+      ...battle,
+      enableUI: false,
+    });
 
     setTimeout((): void => {
       audio = new Audio('./src/assets/sfx/Onix.wav');
@@ -73,7 +78,7 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
         team1: [...newTeam1],
         team2: [...newTeam2]
       });
-    }, 0);
+    }, 500);
 
     setTimeout((): void => {
       audio = new Audio('./src/assets/sfx/Squirtle.wav');
@@ -106,7 +111,7 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
         team1: [...newTeam1],
         team2: [...newTeam2]
       });
-    }, 1600);
+    }, 2100);
 
     // This SetTimeout function will reinitialize the animation of each Pokémon to its stance one
     setTimeout((): void => {
@@ -119,7 +124,7 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
         team1: [...newTeam1],
         team2: [...newTeam2]
       });
-    }, 3200);
+    }, 3700);
   }
   
   return (
