@@ -13,13 +13,21 @@ import MoveType from '../../types/move';
 
 const Move: FC<MovePropsType> = (props: MovePropsType) => {
   // Props
-  const { move, battle }: MovePropsType = props;
+  const { move, battle, game }: MovePropsType = props;
 
   // States
   const setBattle: SetterOrUpdater<BattleType> = useSetRecoilState<BattleType>(battleState);
 
   // Functions
   const useMove = (): void => {
+    // Initializes a new SFX sound
+    let audio: HTMLAudioElement  = new Audio('./src/assets/sfx/Ok.wav');
+
+    // Checks if the SFX are enabled in the game global state
+    if (game.enableSFX) {
+      audio.play();
+    }
+
     // Copies Pokemon and their teams
     let newTeam1: PokemonType[] = [...battle.team1];
     let newSquirtle: PokemonType = {...battle.team1[0]};
@@ -35,6 +43,13 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
     const onixDamages: number = Math.floor(newOnix.currentLV * onixMove.damages * 0.5);
 
     setTimeout((): void => {
+      audio = new Audio('./src/assets/sfx/Onix.wav');
+  
+      // Checks if the SFX are enabled in the game global state
+      if (game.enableSFX) {
+        audio.play();
+      }
+
       // Takes Onix damages to Squirtle HP then plays Onix attack animation
       newSquirtle.currentHP -= onixDamages;
       newTeam1[0] = {...newSquirtle, currentAnimation: 'SquirtleStance'};
@@ -61,6 +76,13 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
     }, 0);
 
     setTimeout((): void => {
+      audio = new Audio('./src/assets/sfx/Squirtle.wav');
+  
+      // Checks if the SFX are enabled in the game global state
+      if (game.enableSFX) {
+        audio.play();
+      }
+
       // Takes Squirtle damages to Onix HP then plays Squirtle attack animation
       newOnix.currentHP -= squirtleDamages;
       newTeam2[0] = {...newOnix, currentAnimation: 'OnixStance'};
@@ -84,7 +106,7 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
         team1: [...newTeam1],
         team2: [...newTeam2]
       });
-    }, 2000);
+    }, 1600);
 
     // This SetTimeout function will reinitialize the animation of each Pokémon to its stance one
     setTimeout((): void => {
@@ -97,7 +119,7 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
         team1: [...newTeam1],
         team2: [...newTeam2]
       });
-    }, 4000);
+    }, 3200);
   }
   
   return (

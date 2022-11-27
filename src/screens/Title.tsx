@@ -35,7 +35,7 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
   const setGame: SetterOrUpdater<GameType> = useSetRecoilState<GameType>(gameState);
 
   // Functions
-  const changeScreen = (): void => {  
+  const changeScreen = (): void => {
     // Initializes a new SFX sound  
     const audio: HTMLAudioElement  = new Audio('./src/assets/sfx/Ok.wav');
 

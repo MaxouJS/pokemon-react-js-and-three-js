@@ -67,7 +67,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
           },
           {
             moveName: 'Water Gun',
-            damages: 1
+            damages: 2
           },
         ],
       },
@@ -94,7 +94,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
           },
           {
             moveName: 'Rock Throw',
-            damages: 1
+            damages: 2
           },
         ],
       },
@@ -216,7 +216,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
                     battle?.team1[0].moves.map((m: MoveType, i: number) => {
                       return (
                         <RecoilBridge key={i}>
-                          <Move move={m} battle={battle} />
+                          <Move move={m} battle={battle} game={game} />
                         </RecoilBridge>
                       );
                     })
