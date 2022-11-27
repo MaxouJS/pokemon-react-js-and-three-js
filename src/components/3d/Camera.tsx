@@ -7,7 +7,7 @@ import CameraType from '../../types/props/3d/camera';
 
 const Camera: FC<CameraType> = (props: CameraType) => {
   // Props
-  const { children, position, rotation, enableRotate, minimumDistance, maximumDistance, maximumPolarAngle } = props;
+  const { children, enableRotate, position, rotation, minimumDistance, maximumDistance, maximumPolarAngle } = props;
   
   return (
     <>
@@ -22,7 +22,7 @@ const Camera: FC<CameraType> = (props: CameraType) => {
       />
       {/* Creates a perspective camera that uses passed as props parameters */}  
       {/* @ts-ignore, we use here an array of number instead of a Vector3, that is working as well */}
-      <PerspectiveCamera position={position} rotation={rotation} >
+      <PerspectiveCamera position={position} rotation={rotation}>
         {children}
       </PerspectiveCamera>
     </>

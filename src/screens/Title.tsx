@@ -98,11 +98,15 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
           />
           {/* Places manually some 3d animated elements */}
           <Animation title={'SquirtleHi'} position={[-3, 0, -0.5]} rotation={[0, Math.PI * 0.4, 0]} scale={[1, 1, 1]} />
-          <Animation title={'Tree'} position={[-9, -0.1, -10]} rotation={[0, Math.PI / 2, 0]} scale={[1.25, 1.25, 1.25]} />
+          <Animation title={'Tree'} position={[-9, -0.1, -10]} rotation={[0, Math.PI / 2, 0]} scale={[1, 1, 1]} />
           <Animation title={'Tree'} position={[-10, -0.1, -6]} rotation={[0, Math.PI / 2, 0]} scale={[1, 1, 1]} />
-          <Animation title={'Tree'} position={[-10, -0.1, 0]} rotation={[0, Math.PI / 2, 0]} scale={[1.5, 1.5, 1.5]} />
+          <Animation title={'Tree'} position={[-10, -0.1, 0]} rotation={[0, Math.PI / 2, 0]} scale={[1, 1, 1]} />
           <Animation title={'Tree'} position={[-10, -0.1, 6]} rotation={[0, Math.PI / 2, 0]} scale={[1, 1, 1]} />
-          <Animation title={'Tree'} position={[-9, -0.1, 10]} rotation={[0, Math.PI / 2, 0]} scale={[1.25, 1.25, 1.25]} />
+          <Animation title={'Tree'} position={[-9, -0.1, 10]} rotation={[0, Math.PI / 2, 0]} scale={[1, 1, 1]} />
+          <Animation title={'Tree'} position={[-14, -0.1, -12.5]} rotation={[0, Math.PI / 2, 0]} scale={[1, 1, 1]} />
+          <Animation title={'Tree'} position={[-15, -0.1, -5]} rotation={[0, Math.PI / 2, 0]} scale={[1, 1, 1]} />
+x          <Animation title={'Tree'} position={[-15, -0.1, 5]} rotation={[0, Math.PI / 2, 0]} scale={[1, 1, 1]} />
+          <Animation title={'Tree'} position={[-14, -0.1, 12.5]} rotation={[0, Math.PI / 2, 0]} scale={[1, 1, 1]} />
           <GrasslandGenerator />
         </Camera>
       </Canvas>

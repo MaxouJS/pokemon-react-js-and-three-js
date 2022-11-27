@@ -3,9 +3,9 @@ import { ReactNode } from 'react';
 
 interface Camera {
   children: ReactNode;
+  enableRotate: boolean;
   position: number[];
   rotation: number[];
-  enableRotate: boolean;
   minimumDistance: number;
   maximumDistance: number;
   maximumPolarAngle: number;

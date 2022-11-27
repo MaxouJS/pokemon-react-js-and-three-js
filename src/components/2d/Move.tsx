@@ -34,41 +34,70 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
     // Creates a random damages number based on Onix properties
     const onixDamages: number = Math.floor(newOnix.currentLV * onixMove.damages * 0.5);
 
-    newOnix.currentHP -= squirtleDamages;
-    newTeam2[0] = {...newOnix, currentAnimation: 'OnixAttack'};
+    setTimeout((): void => {
+      // Takes Onix damages to Squirtle HP then plays Onix attack animation
+      newSquirtle.currentHP -= onixDamages;
+      newTeam1[0] = {...newSquirtle, currentAnimation: 'SquirtleStance'};
+      newTeam2[0] = {...newOnix, currentAnimation: 'OnixAttack'};
 
-    newSquirtle.currentHP -= onixDamages;
-    newTeam1[0] = {...newSquirtle, currentAnimation: 'SquirtleAttack'};
+      // Checks Squirtle current HP then fixing it to 0 if its going under 0
+      {
+        (
+          newSquirtle.currentHP < 0
+        ) ? (
+          newSquirtle.currentHP = 0
+        ) : (
+          newSquirtle.currentHP
+        )
+      }
 
-    {
-      (
-        newSquirtle.currentHP < 0
-      ) ? (
-        newSquirtle.currentHP = 0
-      ) : (
-        newSquirtle.currentHP
-      )
-    }
+      // Sets both of the teams with the Pokémon with new properties, currentHP and currentAnimation in this case
+      setBattle({
+        ...battle,
+        enableUI: false,
+        team1: [...newTeam1],
+        team2: [...newTeam2]
+      });
+    }, 0);
 
-    {
-      (
-        newOnix.currentHP < 0
-      ) ? (
-        newOnix.currentHP = 0
-      ) : (
-        newOnix.currentHP
-      )
-    }
+    setTimeout((): void => {
+      // Takes Squirtle damages to Onix HP then plays Squirtle attack animation
+      newOnix.currentHP -= squirtleDamages;
+      newTeam2[0] = {...newOnix, currentAnimation: 'OnixStance'};
+      newTeam1[0] = {...newSquirtle, currentAnimation: 'SquirtleAttack'};
 
-    setBattle({...battle, team1: [...newTeam1], team2: [...newTeam2]});
+      // Checks Onix current HP then fixing it to 0 if its going under 0
+      {
+        (
+          newOnix.currentHP < 0
+        ) ? (
+          newOnix.currentHP = 0
+        ) : (
+          newOnix.currentHP
+        )
+      }
 
+      // Sets both of the teams with the Pokémon with new properties, currentHP and currentAnimation in this case
+      setBattle({
+        ...battle,
+        enableUI: false,
+        team1: [...newTeam1],
+        team2: [...newTeam2]
+      });
+    }, 2000);
+
+    // This SetTimeout function will reinitialize the animation of each Pokémon to its stance one
     setTimeout((): void => {
       newTeam1[0] = {...newSquirtle, currentAnimation: 'SquirtleStance'};
       newTeam2[0] = {...newOnix, currentAnimation: 'OnixStance'};
 
-      setBattle({...battle, team1: [...newTeam1], team2: [...newTeam2]});
-    }, 1700);
-    
+      setBattle({
+        ...battle,
+        enableUI: true,
+        team1: [...newTeam1],
+        team2: [...newTeam2]
+      });
+    }, 4000);
   }
   
   return (

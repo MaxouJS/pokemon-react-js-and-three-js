@@ -50,7 +50,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
     const newTeam1: PokemonType[] = [
       {
         pokemonName: 'Squirtle',
-        currentLV: 7,
+        currentLV: 12,
         currentHP: 1,
         maximumHP: 1,
         attack: 1,
@@ -118,6 +118,11 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
     const newBattle: BattleType = {
       textBox: '',
       enableUI: true,
+      camera: {
+        enableRotate: true,
+        position: [0, -1.25, 0],
+        rotation: [0, Math.PI * 1.5, 0],
+      },
       team1: newTeam(newTeam1),
       team2: newTeam(newTeam2),
     };
@@ -225,95 +230,103 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
         </Html>
         {/* Initializes 3d elements */}
         {/* Initializes camera props */}
-        <Camera
-          position={[0, -1.25, 0]}
-          rotation={[0, Math.PI * 1.5, 0]}
-          enableRotate={true}
-          minimumDistance={10}
-          maximumDistance={10}
-          maximumPolarAngle={Math.PI * 0.5}
-        >
-          {/* Initializes scene props */}
-          <Scene
-            enablePostProcessing={game.enablePostProcessing}
-            enableShadows={game.enableShadows}
-            blurMinimumDistance={0.1}
-            blurMaximumDistance={30}
-          />
-          <StadiumGenerator />
-          {/* Checks if the battle state exists then displays the Pokémon 3d animations with their parameters contained in the battle global state */}
-          {
-            (
-              battle?.team1
-            ) ? (
-              <>
-                {/* That is not possible to load an animation just with its file name, you need to display or hide it */}
-                {
-                  battle?.team1[0].currentAnimation === 'SquirtleStance'
-                  ?
-                  <Animation
-                    title='SquirtleStance'
-                    position={battle?.team1[0].position as number[]}
-                    rotation={battle?.team1[0].rotation as number[]}
-                    scale={battle?.team1[0].scale as number[]}
-                  />
-                  :
+        {
+          (
+            battle?.camera
+          ) ? (
+            <Camera
+              enableRotate={battle.camera.enableRotate}
+              position={battle.camera.position}
+              rotation={battle.camera.rotation}
+              minimumDistance={10}
+              maximumDistance={10}
+              maximumPolarAngle={Math.PI * 0.5}
+            >
+              {/* Initializes scene props */}
+              <Scene
+                enablePostProcessing={game.enablePostProcessing}
+                enableShadows={game.enableShadows}
+                blurMinimumDistance={0.1}
+                blurMaximumDistance={30}
+              />
+              <StadiumGenerator />
+              {/* Checks if the battle state exists then displays the Pokémon 3d animations with their parameters contained in the battle global state */}
+              {
+                (
+                  battle?.team1
+                ) ? (
+                  <>
+                    {/* That is not possible to load an animation just with its file name, you need to display or hide it */}
+                    {
+                      battle?.team1[0].currentAnimation === 'SquirtleStance'
+                      ?
+                      <Animation
+                        title='SquirtleStance'
+                        position={battle?.team1[0].position as number[]}
+                        rotation={battle?.team1[0].rotation as number[]}
+                        scale={battle?.team1[0].scale as number[]}
+                      />
+                      :
+                      null
+                    }
+                    {
+                      battle?.team1[0].currentAnimation === 'SquirtleAttack'
+                      ?
+                      <Animation
+                        title='SquirtleAttack'
+                        position={battle?.team1[0].position as number[]}
+                        rotation={battle?.team1[0].rotation as number[]}
+                        scale={battle?.team1[0].scale as number[]}
+                      />
+                      :
+                      null
+                    }
+                  </>
+                ) : (
                   null
-                }
-                {
-                  battle?.team1[0].currentAnimation === 'SquirtleAttack'
-                  ?
-                  <Animation
-                    title='SquirtleAttack'
-                    position={battle?.team1[0].position as number[]}
-                    rotation={battle?.team1[0].rotation as number[]}
-                    scale={battle?.team1[0].scale as number[]}
-                  />
-                  :
+                )
+              }
+              {/* Checks if the battle state exists then displays the Pokémon 3d animations with their parameters contained in the battle global state */}
+              {
+                (
+                  battle?.team2
+                ) ? (
+                  <>
+                    {/* That is not possible to load an animation just with its file name, you need to display or hide it */} 
+                    {
+                      battle?.team2[0].currentAnimation === 'OnixStance'
+                      ?
+                      <Animation
+                        title='OnixStance'
+                        position={battle?.team2[0].position as number[]}
+                        rotation={battle?.team2[0].rotation as number[]}
+                        scale={battle?.team2[0].scale as number[]}
+                      />
+                      :
+                      null
+                    }
+                    {
+                      battle?.team2[0].currentAnimation === 'OnixAttack'
+                      ?
+                      <Animation
+                        title='OnixAttack'
+                        position={battle?.team2[0].position as number[]}
+                        rotation={battle?.team2[0].rotation as number[]}
+                        scale={battle?.team2[0].scale as number[]}
+                      />
+                      :
+                      null
+                    }
+                  </>
+                ) : (
                   null
-                }
-              </>
-            ) : (
-              null
-            )
-          }
-          {/* Checks if the battle state exists then displays the Pokémon 3d animations with their parameters contained in the battle global state */}
-          {
-            (
-              battle?.team2
-            ) ? (
-              <>
-                {/* That is not possible to load an animation just with its file name, you need to display or hide it */} 
-                {
-                  battle?.team2[0].currentAnimation === 'OnixStance'
-                  ?
-                  <Animation
-                    title='OnixStance'
-                    position={battle?.team2[0].position as number[]}
-                    rotation={battle?.team2[0].rotation as number[]}
-                    scale={battle?.team2[0].scale as number[]}
-                  />
-                  :
-                  null
-                }
-                {
-                  battle?.team2[0].currentAnimation === 'OnixAttack'
-                  ?
-                  <Animation
-                    title='OnixAttack'
-                    position={battle?.team2[0].position as number[]}
-                    rotation={battle?.team2[0].rotation as number[]}
-                    scale={battle?.team2[0].scale as number[]}
-                  />
-                  :
-                  null
-                }
-              </>
-            ) : (
-              null
-            )
-          }
-        </Camera>
+                )
+              }
+            </Camera>
+          ) : (
+            null
+          )
+        } 
       </Canvas>
     </div>
   );

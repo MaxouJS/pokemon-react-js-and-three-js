@@ -95,9 +95,9 @@ const StadiumGenerator: FC = () => {
       // Y axis rotation
       true,
       // Minimum distance
-      7.5,
+      10,
       // Maximum distance
-      40,
+      35,
       // Minimum scale
       1,
       // Maximum scale
