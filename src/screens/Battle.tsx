@@ -63,11 +63,11 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
         moves: [
           {
             moveName: 'Tackle',
-            damages: 1
+            damages: 10
           },
           {
             moveName: 'Water Gun',
-            damages: 2
+            damages: 12
           },
         ],
       },
@@ -90,11 +90,11 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
         moves: [
           {
             moveName: 'Tackle',
-            damages: 1
+            damages: 10
           },
           {
             moveName: 'Rock Throw',
-            damages: 2
+            damages: 12
           },
         ],
       },
@@ -117,7 +117,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
     // Initializes the battle
     const newBattle: BattleType = {
       textBox: '',
-      enableUI: true,
+      enableUI: false,
       camera: {
         enableRotate: true,
         position: [0, -1.25, 0],
@@ -129,35 +129,51 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
 
     setBattle(newBattle);
 
-    /*
     let newTextBox: string = 'You are challenged by Gym Leader Brock!';
 
     setBattle({...newBattle, textBox: newTextBox,});
 
     setTimeout((): void => {
-      newTextBox: string = 'Gym Leader Brock sent out Onix!';
+      newTextBox = '';
+
+      setBattle({...newBattle, textBox: newTextBox,});
+    }, 2000);
+
+    setTimeout((): void => {
+      newTextBox = 'Gym Leader Brock sent out Onix!';
 
       setBattle({...newBattle, textBox: newTextBox,});
     }, 2500);
 
     setTimeout((): void => {
-      newTextBox: string = 'Go! Squirtle!';
+      newTextBox = '';
+
+      setBattle({...newBattle, textBox: newTextBox,});
+    }, 4500);
+
+    setTimeout((): void => {
+      newTextBox = 'Go! Squirtle!';
 
       setBattle({...newBattle, textBox: newTextBox,});
     }, 5000);
 
     setTimeout((): void => {
-      newTextBox: string = '(You can click and hold to rotate the camera.)';
+      newTextBox = '';
+
+      setBattle({...newBattle, textBox: newTextBox,});
+    }, 7000);
+
+    setTimeout((): void => {
+      newTextBox = '(You can click and hold to rotate the camera.)';
 
       setBattle({...newBattle, textBox: newTextBox,});
     }, 7500);
 
     setTimeout((): void => {
-      newTextBox: string = '';
+      newTextBox = '';
 
       setBattle({...newBattle, textBox: newTextBox, enableUI: true,});
-    }, 10000);
-    */
+    }, 9500);
   }, [setBattle]);
 
   return (

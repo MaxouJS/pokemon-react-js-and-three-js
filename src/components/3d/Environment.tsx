@@ -32,7 +32,7 @@ const Environment: FC<EnvironmentType> = (props: EnvironmentType) => {
   );
 };
 
-// Preloads 3d models at the 3d canvas initializion
+// Preloads 3d models at the 3d canvas initializion, avoid black screen issue while a new model is loaded
 useGLTF.preload('./src/assets/environments/Grassland.glb');
 useGLTF.preload('./src/assets/environments/Stadium.glb');
 

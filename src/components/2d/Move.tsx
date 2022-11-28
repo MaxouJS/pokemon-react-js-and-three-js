@@ -38,9 +38,11 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
     const onixMove: MoveType = newOnix.moves[Math.floor(Math.random() * 2)];
 
     // Creates a random damages number based on Squirtle properties
-    const squirtleDamages: number = Math.floor(newSquirtle.currentLV * move.damages * 0.25);
+    const squirtleDamages: number = Math.floor(((move.damages + newSquirtle.attack) * (Math.random() * 1.5 + 0.5)) - newOnix.defense);
+    console.log(squirtleDamages);
     // Creates a random damages number based on Onix properties
-    const onixDamages: number = Math.floor(newOnix.currentLV * onixMove.damages * 0.25);
+    const onixDamages: number = Math.floor(((onixMove.damages + newOnix.attack) * (Math.random() * 1.5 + 0.5)) - newSquirtle.defense);
+    console.log(onixDamages);
 
     setBattle({
       ...battle,
