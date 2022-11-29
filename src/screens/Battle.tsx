@@ -234,7 +234,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
             (
               battle?.enableUI && battle?.team1
             ) ? (
-              <div className='absolute bottom-0 right-0'>
+              <div className='absolute bottom-0 right-0 animate-pulse hover:animate-none'>
                 <div className='flex flex-col p-4 space-y-4'>
                   {
                     battle?.team1[0].moves.map((m: MoveType, i: number) => {

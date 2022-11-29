@@ -25,8 +25,8 @@ const App: FC = () => {
       currentScreen: 'Title',
       enableBGM: true,
       enableSFX: true,
-      enablePostProcessing: false,
-      enableShadows: false,
+      enablePostProcessing: true,
+      enableShadows: true,
       bgm: [],
     });
   }, [setGame]);
