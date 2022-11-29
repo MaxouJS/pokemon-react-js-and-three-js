@@ -19,7 +19,7 @@ const BGM: FC<BGMType> = (props: BGMType) => {
   const game: GameType = useRecoilValue<GameType>(gameState);
 
   // Initializes BGM sound
-  const [play, {stop}]: ReturnedValue = useSound(`./src/assets/bgm/${bgmName}.wav`, { volume: 0.5, interrupt: true });
+  const [play, {stop}]: ReturnedValue = useSound(`bgm/${bgmName}.wav`, { volume: 0.5, interrupt: true });
 
   // Hooks
   useEffect((): void => {

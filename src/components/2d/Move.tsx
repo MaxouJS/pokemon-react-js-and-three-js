@@ -24,7 +24,7 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
   // Functions
   const useMove = (): void => {
     // Initializes a new SFX sound
-    let audio: HTMLAudioElement  = new Audio('./src/assets/sfx/Ok.wav');
+    let audio: HTMLAudioElement  = new Audio('sfx/Ok.wav');
 
     // Checks if the SFX are enabled in the game global state
     if (game.enableSFX) {
@@ -55,7 +55,7 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
     // All the followings timeouts are here for the user experience, to simulate a "real" Pokémon battle
     setTimeout((): void => {
       // Playing the audio sound of the Squirtle move depending of the move name
-      audio = new Audio(`./src/assets/sfx/${move.moveName.replace(/ /g,'')}.wav`);
+      audio = new Audio(`sfx/${move.moveName.replace(/ /g,'')}.wav`);
   
       // Checks if the SFX are enabled in the game global state
       if (game.enableSFX) {
@@ -111,7 +111,7 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
 
     setTimeout((): void => {
       // Playing the audio sound of the Onix move depending of the move name
-      audio = new Audio(`./src/assets/sfx/${onixMove.moveName.replace(/ /g,'')}.wav`);
+      audio = new Audio(`sfx/${onixMove.moveName.replace(/ /g,'')}.wav`);
   
       // Checks if the SFX are enabled in the game global state
       if (game.enableSFX) {

@@ -134,7 +134,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
     }, 2000);
 
     setTimeout((): void => {
-      const audio: HTMLAudioElement = new Audio('./src/assets/sfx/Onix.wav');
+      const audio: HTMLAudioElement = new Audio('sfx/Onix.wav');
   
       // Checks if the SFX are enabled in the game global state
       if (game.enableSFX) {
@@ -153,7 +153,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
     }, 4500);
 
     setTimeout((): void => {
-      const audio: HTMLAudioElement = new Audio('./src/assets/sfx/Squirtle.wav');
+      const audio: HTMLAudioElement = new Audio('sfx/Squirtle.wav');
   
       // Checks if the SFX are enabled in the game global state
       if (game.enableSFX) {

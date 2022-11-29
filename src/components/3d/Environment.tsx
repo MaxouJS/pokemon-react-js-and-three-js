@@ -13,7 +13,7 @@ const Environment: FC<EnvironmentType> = (props: EnvironmentType) => {
   const { title, position, rotation, scale } = props;
   
   // Initializes this GTLF scene
-  let { scene }: any = useGLTF(`./src/assets/environments/${title}.glb`);
+  let { scene }: any = useGLTF(`environments/${title}.glb`);
 
   // Allows this 3d model to be used as many times as required
   scene = useMemo((): Object3D<Event> => clone(scene), [scene]);
@@ -33,7 +33,7 @@ const Environment: FC<EnvironmentType> = (props: EnvironmentType) => {
 };
 
 // Preloads 3d models at the 3d canvas initializion, avoid black screen issue while a new model is loaded
-useGLTF.preload('./src/assets/environments/Grassland.glb');
-useGLTF.preload('./src/assets/environments/Stadium.glb');
+useGLTF.preload('environments/Grassland.glb');
+useGLTF.preload('environments/Stadium.glb');
 
 export default Environment;

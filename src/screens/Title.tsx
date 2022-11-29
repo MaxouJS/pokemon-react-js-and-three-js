@@ -37,7 +37,7 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
   // Functions
   const changeScreen = (): void => {
     // Initializes a new SFX sound  
-    const audio: HTMLAudioElement  = new Audio('./src/assets/sfx/Ok.wav');
+    const audio: HTMLAudioElement  = new Audio('sfx/Ok.wav');
 
     // Checks if the SFX are enabled in the game global state
     if (game.enableSFX) {
@@ -62,14 +62,14 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
             <Settings game={game} />
           </RecoilBridge>
           <div className='flex flex-col justify-center w-full md:space-y-8 space-y-4 p-8'>
-            <img src='./src/assets/images/Logo.png' className='flex mb-auto h-64 w-64' />
+            <img src='images/Logo.png' className='flex mb-auto h-64 w-64' />
             <button onClick={changeScreen} className='text-2xl uppercase text-white font-bowlby-one animate-pulse lg:text-6xl md:text-4xl hover:scale-110 hover:animate-none duration-100'>Click to play</button>
             <div className='flex justify-center space-x-4'>
               <a href='https://www.linkedin.com/in/maxence-gumiero-47a048181/' target='_blank'>
-                <img src='./src/assets/icons/Linkedin.png' className='md:h-12 h-8 drop-shadow hover:scale-110 duration-100' />
+                <img src='icons/Linkedin.png' className='md:h-12 h-8 drop-shadow hover:scale-110 duration-100' />
               </a>
               <a href='https://github.com/MaxouJS/pokemon-react-js-and-three-js' target='_blank'>
-                <img src='./src/assets/icons/Github.png' className='md:h-12 h-8 drop-shadow hover:scale-110 duration-100' />
+                <img src='icons/Github.png' className='md:h-12 h-8 drop-shadow hover:scale-110 duration-100' />
               </a>
             </div>
             <div className='text-xs drop-shadow lg:block hidden'>

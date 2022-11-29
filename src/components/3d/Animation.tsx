@@ -12,7 +12,7 @@ const Animation: FC<AnimationType> = (props: AnimationType) => {
   const { title, position, rotation, scale } = props;
   
   // Initializes this GTLF scene and its animations
-  let { scene, animations }: any = useGLTF(`./src/assets/animations/${title}.glb`);
+  let { scene, animations }: any = useGLTF(`animations/${title}.glb`);
   
   // Allows this 3d animation to be used as many times as required
   scene = useMemo(() => clone(scene), [scene]);
@@ -38,13 +38,13 @@ const Animation: FC<AnimationType> = (props: AnimationType) => {
 };
 
 // Preloads 3d models at the 3d canvas initializion, avoid black screen issue while a new model is loaded
-useGLTF.preload('./src/assets/animations/Flower.glb');
-useGLTF.preload('./src/assets/animations/OnixAttack.glb');
-useGLTF.preload('./src/assets/animations/OnixStance.glb');
-useGLTF.preload('./src/assets/animations/SquirtleAttack.glb');
-useGLTF.preload('./src/assets/animations/SquirtleHi.glb');
-useGLTF.preload('./src/assets/animations/SquirtleStance.glb');
-useGLTF.preload('./src/assets/animations/Tree.glb');
-useGLTF.preload('./src/assets/animations/Weeds.glb');
+useGLTF.preload('animations/Flower.glb');
+useGLTF.preload('animations/OnixAttack.glb');
+useGLTF.preload('animations/OnixStance.glb');
+useGLTF.preload('animations/SquirtleAttack.glb');
+useGLTF.preload('animations/SquirtleHi.glb');
+useGLTF.preload('animations/SquirtleStance.glb');
+useGLTF.preload('animations/Tree.glb');
+useGLTF.preload('animations/Weeds.glb');
 
 export default Animation;

@@ -13,7 +13,7 @@ const Props: FC<PropsType> = (props: PropsType) => {
   const { title, position, rotation, scale } = props;
   
   // Initializes this GTLF scene
-  let { scene }: any = useGLTF(`./src/assets/props/${title}.glb`);
+  let { scene }: any = useGLTF(`props/${title}.glb`);
 
   // Allows this 3d model to be used as many times as required
   scene = useMemo((): Object3D<Event> => clone(scene), [scene]);
@@ -33,7 +33,7 @@ const Props: FC<PropsType> = (props: PropsType) => {
 };
 
 // Preloads 3d models at the 3d canvas initializion, avoid black screen issue while a new model is loaded
-useGLTF.preload('./src/assets/props/Rock1.glb');
-useGLTF.preload('./src/assets/props/Rock2.glb');
+useGLTF.preload('props/Rock1.glb');
+useGLTF.preload('props/Rock2.glb');
 
 export default Props;
