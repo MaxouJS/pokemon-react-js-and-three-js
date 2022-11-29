@@ -23,8 +23,8 @@ const App: FC = () => {
   useEffect((): void => {
     setGame({
       currentScreen: 'Title',
-      enableBGM: true,
-      enableSFX: true,
+      enableBGM: false,
+      enableSFX: false,
       enablePostProcessing: true,
       enableShadows: true,
       bgm: [],
