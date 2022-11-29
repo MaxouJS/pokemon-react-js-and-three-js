@@ -4,12 +4,14 @@ import { SetterOrUpdater, useSetRecoilState } from 'recoil';
 
 // States
 import battleState from '../../atoms/battle';
+import gameState from '../../atoms/game';
 
 // Types
 import MovePropsType from '../../types/props/2d/move';
 import BattleType from '../../types/battle';
-import PokemonType from '../../types/pokemon';
+import GameType from '../../types/game';
 import MoveType from '../../types/move';
+import PokemonType from '../../types/pokemon';
 
 const Move: FC<MovePropsType> = (props: MovePropsType) => {
   // Props
@@ -17,6 +19,7 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
 
   // States
   const setBattle: SetterOrUpdater<BattleType> = useSetRecoilState<BattleType>(battleState);
+  const setGame: SetterOrUpdater<GameType> = useSetRecoilState<GameType>(gameState);
 
   // Functions
   const useMove = (): void => {
@@ -38,10 +41,10 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
     const onixMove: MoveType = newOnix.moves[Math.floor(Math.random() * 2)];
 
     // Creates a random damages number based on Squirtle properties
-    const squirtleDamages: number = Math.floor(((move.damages + newSquirtle.attack) * (Math.random() * 1.5 + 0.5)) - newOnix.defense);
+    const squirtleDamages: number = Math.floor(move.damages + newSquirtle.attack - newOnix.defense);
     console.log(squirtleDamages);
     // Creates a random damages number based on Onix properties
-    const onixDamages: number = Math.floor(((onixMove.damages + newOnix.attack) * (Math.random() * 1.5 + 0.5)) - newSquirtle.defense);
+    const onixDamages: number = Math.floor(onixMove.damages + newOnix.attack - newSquirtle.defense);
     console.log(onixDamages);
 
     setBattle({
@@ -50,40 +53,7 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
     });
 
     setTimeout((): void => {
-      audio = new Audio('./src/assets/sfx/Onix.wav');
-  
-      // Checks if the SFX are enabled in the game global state
-      if (game.enableSFX) {
-        audio.play();
-      }
-
-      // Takes Onix damages to Squirtle HP then plays Onix attack animation
-      newSquirtle.currentHP -= onixDamages;
-      newTeam1[0] = {...newSquirtle, currentAnimation: 'SquirtleStance'};
-      newTeam2[0] = {...newOnix, currentAnimation: 'OnixAttack'};
-
-      // Checks Squirtle current HP then fixing it to 0 if its going under 0
-      {
-        (
-          newSquirtle.currentHP < 0
-        ) ? (
-          newSquirtle.currentHP = 0
-        ) : (
-          newSquirtle.currentHP
-        )
-      }
-
-      // Sets both of the teams with the Pokémon with new properties, currentHP and currentAnimation in this case
-      setBattle({
-        ...battle,
-        enableUI: false,
-        team1: [...newTeam1],
-        team2: [...newTeam2]
-      });
-    }, 500);
-
-    setTimeout((): void => {
-      audio = new Audio('./src/assets/sfx/Squirtle.wav');
+      audio = new Audio(`./src/assets/sfx/${move.moveName.replace(/ /g,'')}.wav`);
   
       // Checks if the SFX are enabled in the game global state
       if (game.enableSFX) {
@@ -113,24 +83,124 @@ const Move: FC<MovePropsType> = (props: MovePropsType) => {
         team1: [...newTeam1],
         team2: [...newTeam2]
       });
-    }, 2100);
+    }, 500);
 
-    // This SetTimeout function will reinitialize the animation of each Pokémon to its stance one
     setTimeout((): void => {
       newTeam1[0] = {...newSquirtle, currentAnimation: 'SquirtleStance'};
+
+      setBattle({
+        ...battle,
+        textBox: `Squirtle used ${move.moveName}!`,
+        enableUI: false,
+        team1: [...newTeam1],
+        team2: [...newTeam2]
+      });
+    }, 2100);
+
+    setTimeout((): void => {
+      setBattle({
+        ...battle,
+        textBox: '',
+        enableUI: false,
+        team1: [...newTeam1],
+        team2: [...newTeam2]
+      });
+    }, 4100);
+
+    setTimeout((): void => {
+      audio = new Audio(`./src/assets/sfx/${onixMove.moveName.replace(/ /g,'')}.wav`);
+  
+      // Checks if the SFX are enabled in the game global state
+      if (game.enableSFX) {
+        audio.play();
+      }
+
+      // Takes Onix damages to Squirtle HP then plays Onix attack animation
+      newSquirtle.currentHP -= onixDamages;
+      newTeam1[0] = {...newSquirtle, currentAnimation: 'SquirtleStance'};
+      newTeam2[0] = {...newOnix, currentAnimation: 'OnixAttack'};
+
+      // Checks Squirtle current HP then fixing it to 0 if its going under 0
+      {
+        (
+          newSquirtle.currentHP < 0
+        ) ? (
+          newSquirtle.currentHP = 0
+        ) : (
+          newSquirtle.currentHP
+        )
+      }
+
+      // Sets both of the teams with the Pokémon with new properties, currentHP and currentAnimation in this case
+      setBattle({
+        ...battle,
+        enableUI: false,
+        team1: [...newTeam1],
+        team2: [...newTeam2]
+      });
+    }, 4600);
+
+    setTimeout((): void => {
       newTeam2[0] = {...newOnix, currentAnimation: 'OnixStance'};
 
       setBattle({
         ...battle,
-        enableUI: true,
+        textBox: `Onix used ${onixMove.moveName}!`,
+        enableUI: false,
         team1: [...newTeam1],
         team2: [...newTeam2]
       });
-    }, 3700);
+    }, 6200);
+
+    setTimeout((): void => {
+      setBattle({
+        ...battle,
+        textBox: '',
+        enableUI: false,
+        team1: [...newTeam1],
+        team2: [...newTeam2]
+      });
+    }, 8200);
+
+    setTimeout((): void => {
+      if (newOnix.currentHP === 0) {
+        setBattle({
+          ...battle,
+          textBox: 'You win!',
+          enableUI: false,
+          team1: [...newTeam1],
+          team2: [...newTeam2]
+        });
+
+        setTimeout((): void => {
+          setGame({...game, currentScreen: 'Title'});
+        }, 2000);
+      } else if (newSquirtle.currentHP === 0) {
+        setBattle({
+          ...battle,
+          textBox: 'You win!',
+          enableUI: false,
+          team1: [...newTeam1],
+          team2: [...newTeam2]
+        });
+
+        setTimeout((): void => {
+          setGame({...game, currentScreen: 'Title'});
+        }, 2000);
+      } else {
+        setBattle({
+          ...battle,
+          textBox: '',
+          enableUI: true,
+          team1: [...newTeam1],
+          team2: [...newTeam2]
+        });
+      }
+    }, 8700);
   }
   
   return (
-    <button onClick={useMove} className='bg-gradient-to-r from-cyan-400 to-green-400 shadow-xl shadow-green-400/50 rounded-xl ring-2 ring-cyan-400/50 md:w-64 w-48 p-2 text-white text-sm font-bold drop-shadow hover:scale-105 duration-100'>
+    <button onClick={useMove} className='bg-gradient-to-r from-cyan-400 to-green-400 shadow-xl shadow-green-400/50 rounded-xl ring-4 ring-cyan-400/50 border-2 border-white md:w-64 w-48 p-2 text-sm font-semibold drop-shadow hover:scale-105 duration-100'>
       <p>{move.moveName}</p>
     </button>
   );

@@ -7,7 +7,6 @@ interface Pokemon {
   maximumHP: number;
   attack: number;
   defense: number;
-  speed: number;
   position: number[];
   rotation: number[];
   scale: number[];

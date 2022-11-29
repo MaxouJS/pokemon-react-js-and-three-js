@@ -14,7 +14,7 @@ const Camera: FC<CameraType> = (props: CameraType) => {
       {/* Creates an Orbit Controls camera that is the easiest camera to use */}
       <OrbitControls
         enablePan={false}
-        enableDamping={true}
+        enableDamping={false}
         enableRotate={enableRotate}
         minDistance={minimumDistance}
         maxDistance={maximumDistance}

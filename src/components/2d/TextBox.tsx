@@ -14,8 +14,10 @@ const TextBox: FC<TextBoxType> = (props: TextBoxType) => {
   const { text }: TextBoxType = props;
 
   return (
-    <div className='flex flex-col items-center justify-center bg-black/50 h-full w-full space-y-4'>
-      <p className='text-lg text-white'>{text}</p>
+    <div className='flex flex-col items-center justify-center bg-black/25 h-full w-full space-y-4'>
+      <div className='bg-white/75 rounded-tl-xl rounded-br-xl ring-4 ring-cyan-400/50 border-2 border-white py-4 px-8'>
+        <p className='text-lg font-semibold text-black'>{text}</p>
+      </div>
     </div>
   );
 };

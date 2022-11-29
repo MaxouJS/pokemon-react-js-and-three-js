@@ -1,5 +1,5 @@
 // Packages
-import { Dispatch, FC, ReactNode, SetStateAction, useEffect, useState } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
 import { SetterOrUpdater, useRecoilBridgeAcrossReactRoots_UNSTABLE, useRecoilState, useSetRecoilState } from 'recoil';
 import { Canvas } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
@@ -17,13 +17,11 @@ import StadiumGenerator from '../components/utils/StadiumGenerator';
 
 // States
 import battleState from '../atoms/battle';
-import gameState from '../atoms/game';
 
 // Types
 import ScreenType from '../types/props/screen';
 import BattleType from '../types/battle';
 import PokemonType from '../types/pokemon';
-import GameType from '../types/game';
 
 // Hooks
 import useSetBGM from '../hooks/useSetBgm';
@@ -38,7 +36,6 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
   const { game }: ScreenType = props;
 
   // States
-  const setGame: SetterOrUpdater<GameType> = useSetRecoilState<GameType>(gameState);
   const [battle, setBattle]: [BattleType, SetterOrUpdater<BattleType>] = useRecoilState<BattleType>(battleState);
 
   // Hooks
@@ -55,7 +52,6 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
         maximumHP: 1,
         attack: 1,
         defense: 1,
-        speed: 1,
         position: [0, 0, 7.5],
         rotation: [0, Math.PI * 1, 0],
         scale: [0.75, 0.75, 0.75],
@@ -82,7 +78,6 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
         maximumHP: 1,
         attack: 1,
         defense: 1,
-        speed: 1,
         position: [0, 0, -7.5],
         rotation: [0, Math.PI * 2, 0],
         scale: [1.5, 1.5, 1.5],
@@ -103,11 +98,10 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
     const newTeam = (array: PokemonType[]): PokemonType[] => {
       // Creates new random characteristics for each Pokémon the team passed as argument
       array.forEach((n: PokemonType): void => {
-        n.currentHP = n.currentLV + Math.floor(Math.random() * n.currentLV + 1);
+        n.currentHP = (n.currentLV + Math.floor(Math.random() * n.currentLV + 1)) * 2;
         n.maximumHP = n.currentHP;
         n.attack = n.currentLV + Math.floor(Math.random() * n.currentLV + 1);
         n.defense = n.currentLV + Math.floor(Math.random() * n.currentLV + 1);
-        n.speed = n.currentLV + Math.floor(Math.random() * n.currentLV + 1);
       });
 
       // Returns all the Pokémon with the new characteristics
@@ -140,6 +134,13 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
     }, 2000);
 
     setTimeout((): void => {
+      const audio: HTMLAudioElement = new Audio('./src/assets/sfx/Onix.wav');
+  
+      // Checks if the SFX are enabled in the game global state
+      if (game.enableSFX) {
+        audio.play();
+      }
+      
       newTextBox = 'Gym Leader Brock sent out Onix!';
 
       setBattle({...newBattle, textBox: newTextBox,});
@@ -152,6 +153,13 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
     }, 4500);
 
     setTimeout((): void => {
+      const audio: HTMLAudioElement = new Audio('./src/assets/sfx/Squirtle.wav');
+  
+      // Checks if the SFX are enabled in the game global state
+      if (game.enableSFX) {
+        audio.play();
+      }
+
       newTextBox = 'Go! Squirtle!';
 
       setBattle({...newBattle, textBox: newTextBox,});
@@ -164,7 +172,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
     }, 7000);
 
     setTimeout((): void => {
-      newTextBox = '(You can click and hold to rotate the camera.)';
+      newTextBox = '(You can click and hold to move the camera.)';
 
       setBattle({...newBattle, textBox: newTextBox,});
     }, 7500);
