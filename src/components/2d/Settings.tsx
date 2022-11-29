@@ -8,7 +8,6 @@ import gameState from '../../atoms/game';
 // Types
 import SettingsType from '../../types/props/2d/settings';
 import GameType from '../../types/game';
-import useSetBGM from '../../hooks/useSetBgm';
 
 const Settings: FC<SettingsType> = (props: SettingsType) => {
   // Props

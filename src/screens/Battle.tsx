@@ -24,7 +24,7 @@ import BattleType from '../types/battle';
 import PokemonType from '../types/pokemon';
 
 // Hooks
-import useSetBGM from '../hooks/useSetBgm';
+import useSetBGM from '../hooks/useSetBGM';
 import MoveType from '../types/move';
 import Move from '../components/2d/Move';
 

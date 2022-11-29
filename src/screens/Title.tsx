@@ -22,7 +22,7 @@ import ScreenType from '../types/props/screen';
 import GameType from '../types/game';
 
 // Hooks
-import useSetBGM from '../hooks/useSetBgm';
+import useSetBGM from '../hooks/useSetBGM';
 
 const Title: FC<ScreenType> = (props: ScreenType) => {
   // Allows wrapped components to access Recoil Root
