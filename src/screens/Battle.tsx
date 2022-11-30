@@ -1,6 +1,6 @@
 // Packages
 import { FC, ReactNode, useEffect } from 'react';
-import { SetterOrUpdater, useRecoilBridgeAcrossReactRoots_UNSTABLE, useRecoilState, useSetRecoilState } from 'recoil';
+import { SetterOrUpdater, useRecoilBridgeAcrossReactRoots_UNSTABLE, useRecoilState, } from 'recoil';
 import { Canvas } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 
@@ -59,11 +59,11 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
         moves: [
           {
             moveName: 'Tackle',
-            damages: 10
+            damages: 15
           },
           {
             moveName: 'Water Gun',
-            damages: 12
+            damages: 25
           },
         ],
       },
@@ -85,11 +85,11 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
         moves: [
           {
             moveName: 'Tackle',
-            damages: 10
+            damages: 15
           },
           {
             moveName: 'Rock Throw',
-            damages: 12
+            damages: 20
           },
         ],
       },
@@ -271,7 +271,7 @@ const Battle: FC<ScreenType> = (props: ScreenType) => {
                 enablePostProcessing={game.enablePostProcessing}
                 enableShadows={game.enableShadows}
                 blurMinimumDistance={0.1}
-                blurMaximumDistance={30}
+                blurMaximumDistance={10}
               />
               <StadiumGenerator />
               {/* Checks if the battle state exists then displays the Pokémon 3d animations with their parameters contained in the battle global state */}

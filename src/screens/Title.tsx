@@ -93,7 +93,7 @@ const Title: FC<ScreenType> = (props: ScreenType) => {
           <Scene
             enablePostProcessing={game.enablePostProcessing}
             enableShadows={game.enableShadows}
-            blurMinimumDistance={0.01}
+            blurMinimumDistance={0.05}
             blurMaximumDistance={10}
           />
           {/* Places manually some 3d animated elements */}
